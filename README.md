@@ -1,4 +1,2 @@
 # ITC205
 CSU
-
-Test
