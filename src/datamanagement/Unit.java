@@ -12,17 +12,17 @@ public class Unit implements IUnit {
 
 	private StudentUnitRecordList rs;
 
-	public Unit(String UC, String un, float f1, float f2, float f3, float f4,
-			float f5, int i1, int i2, int i3, StudentUnitRecordList rl) {
+	public Unit(String unitCode, String unitNumber, float passCutoff, float creditCutoff, float distinctionCutoff, float highDistinctionCutoff,
+			float additionalExaminationCutoff, int assignment1Weight, int assignment2Weight, int examWeight, StudentUnitRecordList rl) {
 
-		unitCode_ = UC;
-		unitName_ = un;
-		passCutoff_ = f1;
-		creditCutoff_ = f2;
-		this.distinctionCutoff_ = f3;
-		highDistinctionCutoff_ = f4;
-		this.additionalExaminationCutoff_ = f5;
-		this.setAssessmentWeights(i1, i2, i3);
+		unitCode_ = unitCode;
+		unitName_ = unitNumber;
+		passCutoff_ = passCutoff;
+		creditCutoff_ = creditCutoff;
+		distinctionCutoff_ = distinctionCutoff;
+		highDistinctionCutoff_ = highDistinctionCutoff;
+		additionalExaminationCutoff_ = additionalExaminationCutoff;
+		setAssessmentWeights(assignment1Weight, assignment2Weight, examWeight);
 		rs = rl == null ? new StudentUnitRecordList() : rl;
 	}
 
@@ -125,31 +125,31 @@ public class Unit implements IUnit {
 		this.examWeight_ = examWeight_;
 	}
 
-	private void setCutoffs(float ps, float cr, float di, float hd, float ae) {
-		if (ps < 0 || ps > 100 || cr < 0 || cr > 100 || di < 0 || di > 100
-				|| hd < 0 || hd > 100 || ae < 0 || ae > 100) {
+	private void setCutoffs(float pass, float credit, float distinction, float highDistinction, float additionalExamination) {
+		if (pass < 0 || pass > 100 || credit < 0 || credit > 100 || distinction < 0 || distinction > 100
+				|| highDistinction < 0 || highDistinction > 100 || additionalExamination < 0 || additionalExamination > 100) {
 			throw new RuntimeException(
 					"Assessment cutoffs cant be less than zero or greater than 100");
 		}
-		if (ae >= ps) {
+		if (additionalExamination >= pass) {
 			throw new RuntimeException("AE cutoff must be less than PS cutoff");
 		}
-		if (ps >= cr) {
+		if (pass >= credit) {
 			throw new RuntimeException("PS cutoff must be less than CR cutoff");
 		}
-		if (cr >= di) {
+		if (credit >= distinction) {
 			throw new RuntimeException("CR cutoff must be less than DI cutoff");
 		}
-		if (di >= hd) {
+		if (distinction >= highDistinction) {
 			throw new RuntimeException("DI cutoff must be less than HD cutoff");
 		}
 
 	}
 
-	public String getGrade(float f1, float f2, float f3) {
-		float t = f1 + f2 + f3;
+	public String getGrade(float assignment1Mark, float assignment2Mark, float examMark) {
+		float t = assignment1Mark + assignment2Mark + examMark;
 
-		if (f1 < 0 || f1 > assignment1Weight_ || f2 < 0 || f2 > assignment2Weight_ || f3 < 0 || f3 > examWeight_) {
+		if (assignment1Mark < 0 || assignment1Mark > assignment1Weight_ || assignment2Mark < 0 || assignment2Mark > assignment2Weight_ || examMark < 0 || examMark > examWeight_) {
 			throw new RuntimeException(
 					"marks cannot be less than zero or greater than assessment weights");
 		}
