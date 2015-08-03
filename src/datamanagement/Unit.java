@@ -1,83 +1,83 @@
 package datamanagement;
 
 public class Unit implements IUnit {
-	private String uc;
-	private String UN;
-	private float co2;
-	private float co1;
-	private float co4;
-	private float co3;
-	private float co5;
-	private int a1, a2, ex;
+	private String unitCode_;
+	private String unitName_;
+	private float passCutoff_;
+	private float creditCutoff_;
+	private float distinctionCutoff_;
+	private float highDistinctionCutoff_;
+	private float additionalExaminationCutoff_;
+	private int assignment1Weight_, assignment2Weight_, examWeight_;
 
 	private StudentUnitRecordList rs;
 
 	public Unit(String UC, String un, float f1, float f2, float f3, float f4,
 			float f5, int i1, int i2, int i3, StudentUnitRecordList rl) {
 
-		uc = UC;
-		UN = un;
-		co2 = f1;
-		co1 = f2;
-		this.co4 = f3;
-		co3 = f4;
-		this.co5 = f5;
+		unitCode_ = UC;
+		unitName_ = un;
+		passCutoff_ = f1;
+		creditCutoff_ = f2;
+		this.distinctionCutoff_ = f3;
+		highDistinctionCutoff_ = f4;
+		this.additionalExaminationCutoff_ = f5;
 		this.setAssessmentWeights(i1, i2, i3);
 		rs = rl == null ? new StudentUnitRecordList() : rl;
 	}
 
 	public String getUnitCode() {
-		return this.uc;
+		return this.unitCode_;
 	}
 
 	public String getUnitName() {
 
-		return this.UN;
+		return this.unitName_;
 	}
 
 	public void setPsCutoff1(float cutoff) {
-		this.co2 = cutoff;
+		this.passCutoff_ = cutoff;
 	}
 
 	public float getPsCutoff() {
-		return this.co2;
+		return this.passCutoff_;
 	}
 
 	public void setCrCutoff(float cutoff) {
-		this.co1 = cutoff;
+		this.creditCutoff_ = cutoff;
 	}
 
 	public float getCrCutoff() {
-		return this.co1;
+		return this.creditCutoff_;
 	}
 
 	public void setDiCutoff(float cutoff) {
-		this.co4 = cutoff;
+		this.distinctionCutoff_ = cutoff;
 	}
 
 	public float getDiCuttoff() {
-		return this.co4;
+		return this.distinctionCutoff_;
 	}
 
 	public void HDCutoff(float cutoff) {
-		this.co3 = cutoff;
+		this.highDistinctionCutoff_ = cutoff;
 	}
 
 	public void setHdCutoff(float cutoff) {
-		this.co3 = cutoff;
+		this.highDistinctionCutoff_ = cutoff;
 	}
 
 	public float getHdCutoff() {
-		return this.co3;
+		return this.highDistinctionCutoff_;
 
 	}
 
 	public void setAeCutoff(float cutoff) {
-		this.co5 = cutoff;
+		this.additionalExaminationCutoff_ = cutoff;
 	}
 
 	public float getAeCutoff() {
-		return this.co5;
+		return this.additionalExaminationCutoff_;
 	}
 
 	public void addStudentRecord(IStudentUnitRecord record) {
@@ -98,31 +98,31 @@ public class Unit implements IUnit {
 
 	@Override
 	public int getAsg1Weight() {
-		return a1;
+		return assignment1Weight_;
 	}
 
 	@Override
 	public int getAsg2Weight() {
-		return a2;
+		return assignment2Weight_;
 	}
 
 	@Override
 	public int getExamWeight() {
-		return ex;
+		return examWeight_;
 	}
 
 	@Override
-	public void setAssessmentWeights(int a1, int a2, int ex) {
-		if (a1 < 0 || a1 > 100 || a2 < 0 || a2 > 100 || ex < 0 || ex > 100) {
+	public void setAssessmentWeights(int assignment1Weight_, int assignment2Weight_, int examWeight_) {
+		if (assignment1Weight_ < 0 || assignment1Weight_ > 100 || assignment2Weight_ < 0 || assignment2Weight_ > 100 || examWeight_ < 0 || examWeight_ > 100) {
 			throw new RuntimeException(
 					"Assessment weights cant be less than zero or greater than 100");
 		}
-		if (a1 + a2 + ex != 100) {
+		if (assignment1Weight_ + assignment2Weight_ + examWeight_ != 100) {
 			throw new RuntimeException("Assessment weights must add to 100");
 		}
-		this.a1 = a1;
-		this.a2 = a2;
-		this.ex = ex;
+		this.assignment1Weight_ = assignment1Weight_;
+		this.assignment2Weight_ = assignment2Weight_;
+		this.examWeight_ = examWeight_;
 	}
 
 	private void setCutoffs(float ps, float cr, float di, float hd, float ae) {
@@ -149,20 +149,20 @@ public class Unit implements IUnit {
 	public String getGrade(float f1, float f2, float f3) {
 		float t = f1 + f2 + f3;
 
-		if (f1 < 0 || f1 > a1 || f2 < 0 || f2 > a2 || f3 < 0 || f3 > ex) {
+		if (f1 < 0 || f1 > assignment1Weight_ || f2 < 0 || f2 > assignment2Weight_ || f3 < 0 || f3 > examWeight_) {
 			throw new RuntimeException(
 					"marks cannot be less than zero or greater than assessment weights");
 		}
 
-		if (t < co5) {
+		if (t < additionalExaminationCutoff_) {
 			return "FL";
-		} else if (t < co2)
+		} else if (t < passCutoff_)
 			return "AE";
-		else if (t < co1)
+		else if (t < creditCutoff_)
 			return "PS";
-		else if (t < co4)
+		else if (t < distinctionCutoff_)
 			return "CR";
-		else if (t < co3)
+		else if (t < highDistinctionCutoff_)
 			return "DI";
 		else
 			return "HD";
