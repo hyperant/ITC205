@@ -8,7 +8,7 @@ public interface IUnit {
 
 	public float getPsCutoff();
 
-	public void setPsCutoff1(float cutoff);
+	public void setPsCutoff(float cutoff);
 
 	public float getCrCutoff();
 
