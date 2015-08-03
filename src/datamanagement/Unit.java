@@ -59,10 +59,6 @@ public class Unit implements IUnit {
 		return this.distinctionCutoff_;
 	}
 
-	public void HDCutoff(float cutoff) {
-		this.highDistinctionCutoff_ = cutoff;
-	}
-
 	public void setHdCutoff(float cutoff) {
 		this.highDistinctionCutoff_ = cutoff;
 	}
