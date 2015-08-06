@@ -1,7 +1,7 @@
 package datamanagement;
 
 public interface IStudent {
-
+	
     public Integer getID();
 
     public String getFirstName();
@@ -14,5 +14,4 @@ public interface IStudent {
     public IStudentUnitRecord getUnitRecord( String unitCode );
 
     public StudentUnitRecordList getUnitRecords();
-
 }
