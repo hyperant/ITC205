@@ -100,14 +100,14 @@ public class cgCTL {
 	/**
 	 * Checks the current students grade
 	 * 
-	 * @param mark1 the students mark for their first assignment
-	 * @param mark2 the students mark for their second assignment
-	 * @param mark3 the students mark for their third assignment
+	 * @param asg1 the students mark for their first assignment
+	 * @param asg2 the students mark for their second assignment
+	 * @param exam the students mark for their exam
 	 * @return {@link #String} representation of the current students grade
 	 */
-	public String checkGrade(float mark1, float mark2, float mark3) {
+	public String checkGrade(float asg1, float asg2, float exam) {
 		IUnit unit = UnitManager.UM().getUnit(this.unitCode);
-		String grade = unit.getGrade(mark1, mark2, mark3);
+		String grade = unit.getGrade(asg1, asg2, exam);
 		
 		this.CGUI.setState4(true);
 		this.CGUI.setState5(false);
@@ -129,10 +129,15 @@ public class cgCTL {
 		this.changed = true;
 	}
 
+	/**
+	 * Save the users grade
+	 * 
+	 * @param asg1 the students mark for their first assignment
+	 * @param asg2 the students mark for their second assignment
+	 * @param exam the students mark for their exam
+	 */
 	public void saveGrade(float asg1, float asg2, float exam) {
-		//possible bug? unit is not used
-		
-		IUnit unit = UnitManager.UM().getUnit(this.unitCode);
+		IUnit unit = UnitManager.UM().getUnit(this.unitCode); //Seems to be redundent leaving in for now untill I can confirm it isnt actually needed
 		IStudent studentManager = StudentManager.get().getStudent(this.currentStudentID);
 		
 		IStudentUnitRecord r = studentManager.getUnitRecord(this.unitCode);
