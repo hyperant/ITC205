@@ -140,11 +140,11 @@ public class cgCTL {
 		IUnit unit = UnitManager.UM().getUnit(this.unitCode); //Seems to be redundent leaving in for now untill I can confirm it isnt actually needed
 		IStudent studentManager = StudentManager.get().getStudent(this.currentStudentID);
 		
-		IStudentUnitRecord r = studentManager.getUnitRecord(this.unitCode);
-		r.setAsg1(asg1);
-		r.setAsg2(asg2);
-		r.setExam(exam);
-		StudentUnitRecordManager.instance().saveRecord(r);
+		IStudentUnitRecord studentRecord = studentManager.getUnitRecord(this.unitCode);
+		studentRecord.setAsg1(asg1);
+		studentRecord.setAsg2(asg2);
+		studentRecord.setExam(exam);
+		StudentUnitRecordManager.instance().saveRecord(studentRecord);
 		
 		this.CGUI.setState4(true);
 		this.CGUI.setState5(false);
