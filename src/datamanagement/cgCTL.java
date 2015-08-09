@@ -1,100 +1,118 @@
 package datamanagement;
 
+/**
+ * This class is responsible for setting up the GUI that is displayed to the end user
+ * 
+ * @author Jason Fletcher
+ *
+ */
 public class cgCTL {
 
-	cgUI CGUI;
-	String cuc = null;
-	Integer currentStudentID = null;
-	boolean changed = false;
+	private cgUI CGUI;
+	private String cuc = null;
+	private Integer currentStudentID = null;
+	private boolean changed = false;
 
+	/**
+	 * The construtore method for the class. This class accepts no input, and only creates a new instance of this class.
+	 * </br></br>
+	 * In order to display the GUI to the end user you must call .execute()
+	 * </br>
+	 * Example:</br>
+	 * <code>
+	 * new cgCTL().execute();
+	 * </code>
+	 */
 	public cgCTL() {
 	}
 
 	public void execute() {
-		CGUI = new cgUI(this);
-		CGUI.setState1(false);
-
-		CGUI.setState2(false);
-		CGUI.setState3(false);
-		CGUI.setState4(false);
-		CGUI.setState5(false);
-		CGUI.setState6(false);
-		CGUI.Refresh3();
-
 		ListUnitsCTL luCTL = new ListUnitsCTL();
-		luCTL.listUnits(CGUI);
-		CGUI.setVisible(true);
-		CGUI.setState1(true);
+		
+		this.CGUI = new cgUI(this);
+		this.CGUI.setState1(false);
+
+		this.CGUI.setState2(false);
+		this.CGUI.setState3(false);
+		this.CGUI.setState4(false);
+		this.CGUI.setState5(false);
+		this.CGUI.setState6(false);
+		this.CGUI.Refresh3();
+
+		luCTL.listUnits(this.CGUI);
+		this.CGUI.setVisible(true);
+		this.CGUI.setState1(true);
 	}
 
 	public void unitSelected(String code) {
-
-		if (code.equals("NONE"))
-			CGUI.setState2(false);
-		else {
+		if (code.equals("NONE")) {
+			this.CGUI.setState2(false);
+		} else {
 			ListStudentsCTL lsCTL = new ListStudentsCTL();
-			lsCTL.listStudents(CGUI, code);
-			cuc = code;
-			CGUI.setState2(true);
+			
+			lsCTL.listStudents(this.CGUI, code);
+			this.cuc = code;
+			this.CGUI.setState2(true);
 		}
-		CGUI.setState3(false);
+		
+		this.CGUI.setState3(false);
 	}
 
-	public void studentSelected(Integer id) {
-		currentStudentID = id;
-		if (currentStudentID.intValue() == 0) {
-			CGUI.Refresh3();
-			CGUI.setState3(false);
-			CGUI.setState4(false);
-			CGUI.setState5(false);
-			CGUI.setState6(false);
-		}
+	public void studentSelected(Integer sID) {
+		this.currentStudentID = sID;
+		
+		if (this.currentStudentID.intValue() == 0) {
+			this.CGUI.Refresh3();
+			this.CGUI.setState3(false);
+			this.CGUI.setState4(false);
+			this.CGUI.setState5(false);
+			this.CGUI.setState6(false);
+		} else {
+			IStudent studentmManager = StudentManager.get().getStudent(sID);
+			IStudentUnitRecord studentRecord = studentmManager.getUnitRecord(this.cuc);
 
-		else {
-			IStudent s = StudentManager.get().getStudent(id);
-
-			IStudentUnitRecord r = s.getUnitRecord(cuc);
-
-			CGUI.setRecord(r);
-			CGUI.setState3(true);
-			CGUI.setState4(true);
-			CGUI.setState5(false);
-			CGUI.setState6(false);
-			changed = false;
-
+			this.CGUI.setRecord(studentRecord);
+			this.CGUI.setState3(true);
+			this.CGUI.setState4(true);
+			this.CGUI.setState5(false);
+			this.CGUI.setState6(false);
+			this.changed = false;
 		}
 	}
 
 	public String checkGrade(float f, float g, float h) {
-		IUnit u = UnitManager.UM().getUnit(cuc);
-		String s = u.getGrade(f, g, h);
-		CGUI.setState4(true);
-		CGUI.setState5(false);
-		if (changed) {
-			CGUI.setState6(true);
+		IUnit unit = UnitManager.UM().getUnit(this.cuc);
+		String grade = unit.getGrade(f, g, h);
+		
+		this.CGUI.setState4(true);
+		this.CGUI.setState5(false);
+		
+		if (this.changed) {
+			this.CGUI.setState6(true);
 		}
-		return s;
+		
+		return grade;
 	}
 
 	public void enableChangeMarks() {
-		CGUI.setState4(false);
-		CGUI.setState6(false);
-		CGUI.setState5(true);
-		changed = true;
+		this.CGUI.setState4(false);
+		this.CGUI.setState6(false);
+		this.CGUI.setState5(true);
+		this.changed = true;
 	}
 
 	public void saveGrade(float asg1, float asg2, float exam) {
-
-		IUnit u = UnitManager.UM().getUnit(cuc);
-		IStudent s = StudentManager.get().getStudent(currentStudentID);
-
-		IStudentUnitRecord r = s.getUnitRecord(cuc);
+		IUnit unit = UnitManager.UM().getUnit(this.cuc);
+		IStudent studentManager = StudentManager.get().getStudent(this.currentStudentID);
+		
+		IStudentUnitRecord r = studentManager.getUnitRecord(this.cuc);
 		r.setAsg1(asg1);
 		r.setAsg2(asg2);
 		r.setExam(exam);
 		StudentUnitRecordManager.instance().saveRecord(r);
-		CGUI.setState4(true);
-		CGUI.setState5(false);
-		CGUI.setState6(false);
+		
+		this.CGUI.setState4(true);
+		this.CGUI.setState5(false);
+		this.CGUI.setState6(false);
 	}
 }
