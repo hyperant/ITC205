@@ -10,10 +10,10 @@ public class Unit implements IUnit {
 	private float additionalExaminationCutoff_;
 	private int assignment1Weight_, assignment2Weight_, examWeight_;
 
-	private StudentUnitRecordList rs;
+	private StudentUnitRecordList studentUnitRecordList_;
 
 	public Unit(String unitCode, String unitNumber, float passCutoff, float creditCutoff, float distinctionCutoff, float highDistinctionCutoff,
-			float additionalExaminationCutoff, int assignment1Weight, int assignment2Weight, int examWeight, StudentUnitRecordList rl) {
+			float additionalExaminationCutoff, int assignment1Weight, int assignment2Weight, int examWeight, StudentUnitRecordList studentUnitRecordList) {
 
 		unitCode_ = unitCode;
 		unitName_ = unitNumber;
@@ -23,7 +23,11 @@ public class Unit implements IUnit {
 		highDistinctionCutoff_ = highDistinctionCutoff;
 		additionalExaminationCutoff_ = additionalExaminationCutoff;
 		setAssessmentWeights(assignment1Weight, assignment2Weight, examWeight);
-		rs = rl == null ? new StudentUnitRecordList() : rl;
+		if (studentUnitRecordList == null) {
+			studentUnitRecordList_ = new StudentUnitRecordList();
+		} else {
+			studentUnitRecordList_ = studentUnitRecordList;
+		}
 	}
 
 	public String getUnitCode() {
@@ -77,11 +81,11 @@ public class Unit implements IUnit {
 	}
 
 	public void addStudentRecord(IStudentUnitRecord record) {
-		rs.add(record);
+		studentUnitRecordList_.add(record);
 	}
 
 	public IStudentUnitRecord getStudentRecord(int studentID) {
-		for (IStudentUnitRecord r : rs) {
+		for (IStudentUnitRecord r : studentUnitRecordList_) {
 			if (r.getStudentID() == studentID)
 				return r;
 		}
@@ -89,7 +93,7 @@ public class Unit implements IUnit {
 	}
 
 	public StudentUnitRecordList listStudentRecords() {
-		return rs;
+		return studentUnitRecordList_;
 	}
 
 	@Override
