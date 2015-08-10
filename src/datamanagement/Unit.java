@@ -112,17 +112,17 @@ public class Unit implements IUnit {
 	}
 
 	@Override
-	public void setAssessmentWeights(int assignment1Weight_, int assignment2Weight_, int examWeight_) {
-		if (assignment1Weight_ < 0 || assignment1Weight_ > 100 || assignment2Weight_ < 0 || assignment2Weight_ > 100 || examWeight_ < 0 || examWeight_ > 100) {
+	public void setAssessmentWeights(int assignment1Weight, int assignment2Weight, int examWeight) {
+		if (assignment1Weight < 0 || assignment1Weight > 100 || assignment2Weight < 0 || assignment2Weight > 100 || examWeight_< 0 || examWeight > 100) {
 			throw new RuntimeException(
 					"Assessment weights cant be less than zero or greater than 100");
 		}
 		if (assignment1Weight_ + assignment2Weight_ + examWeight_ != 100) {
 			throw new RuntimeException("Assessment weights must add to 100");
 		}
-		this.assignment1Weight_ = assignment1Weight_;
-		this.assignment2Weight_ = assignment2Weight_;
-		this.examWeight_ = examWeight_;
+		this.assignment1Weight_ = assignment1Weight;
+		this.assignment2Weight_ = assignment2Weight;
+		this.examWeight_ = examWeight;
 	}
 
 	private void setCutoffs(float pass, float credit, float distinction, float highDistinction, float additionalExamination) {
@@ -147,22 +147,22 @@ public class Unit implements IUnit {
 	}
 
 	public String getGrade(float assignment1Mark, float assignment2Mark, float examMark) {
-		float t = assignment1Mark + assignment2Mark + examMark;
+		float total = assignment1Mark + assignment2Mark + examMark;
 
 		if (assignment1Mark < 0 || assignment1Mark > assignment1Weight_ || assignment2Mark < 0 || assignment2Mark > assignment2Weight_ || examMark < 0 || examMark > examWeight_) {
 			throw new RuntimeException(
-					"marks cannot be less than zero or greater than assessment weights");
+					"Marks cannot be less than zero or greater than assessment weights");
 		}
 
-		if (t < additionalExaminationCutoff_) {
+		if (total < additionalExaminationCutoff_) {
 			return "FL";
-		} else if (t < passCutoff_)
+		} else if (total < passCutoff_)
 			return "AE";
-		else if (t < creditCutoff_)
+		else if (total < creditCutoff_)
 			return "PS";
-		else if (t < distinctionCutoff_)
+		else if (total < distinctionCutoff_)
 			return "CR";
-		else if (t < highDistinctionCutoff_)
+		else if (total < highDistinctionCutoff_)
 			return "DI";
 		else
 			return "HD";
