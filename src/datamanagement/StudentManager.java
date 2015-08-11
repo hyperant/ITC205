@@ -66,10 +66,10 @@ public class StudentManager {
 
 		studentRecord = new StudentMap();
 		IStudent student;
-		StudentUnitRecordList ur = StudentUnitRecordManager.instance().getRecordsByUnit(unitCode);
-		for (IStudentUnitRecord S : ur) {
+		StudentUnitRecordList unitRecord = StudentUnitRecordManager.instance().getRecordsByUnit(unitCode);
+		for (IStudentUnitRecord studentUnitRecord : unitRecord) {
 
-			student = createStudentProxy(new Integer(S.getStudentID()));
+			student = createStudentProxy(new Integer(studentUnitRecord.getStudentID()));
 			studentRecord.put(student.getID(), student);
 		}
 		unitMap.put(unitCode, studentRecord);
