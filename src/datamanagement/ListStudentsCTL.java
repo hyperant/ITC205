@@ -1,7 +1,7 @@
 package datamanagement;
 
 public class ListStudentsCTL {
-	private StudentManager studentManager;
+	private StudentManager studentManager_;
 
 	/**
 	 * The constructor method for the class.
@@ -9,7 +9,7 @@ public class ListStudentsCTL {
 	 * Initializes studentManager
 	 */
 	public ListStudentsCTL() {
-		this.studentManager = StudentManager.get();
+		this.studentManager_ = StudentManager.get();
 	}
 
 	/**
@@ -20,7 +20,7 @@ public class ListStudentsCTL {
 	 */
 	public void listStudents(IStudentLister lister, String unitCode) {
 		lister.clearStudents();
-		StudentMap students = this.studentManager.getStudentsByUnit(unitCode);
+		StudentMap students = this.studentManager_.getStudentsByUnit(unitCode);
 		
 		for (Integer id : students.keySet()) {
 			lister.addStudent(students.get(id));
