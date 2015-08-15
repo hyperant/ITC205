@@ -1,16 +1,18 @@
 package datamanagement;
 
 public class ListUnitsCTL {
-	private UnitManager um;
+	private UnitManager unitManager;
 
 	public ListUnitsCTL() {
-		um = UnitManager.UM();
+		this.unitManager = UnitManager.UM();
 	}
 
 	public void listUnits(IUnitLister lister) {
 		lister.clearUnits();
-		UnitMap units = um.getUnits();
-		for (String s : units.keySet())
+		UnitMap units = this.unitManager.getUnits();
+		
+		for (String s : units.keySet()) {
 			lister.addUnit(units.get(s));
+		}
 	}
 }
