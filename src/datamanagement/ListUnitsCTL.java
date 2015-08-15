@@ -1,7 +1,7 @@
 package datamanagement;
 
 public class ListUnitsCTL {
-	private UnitManager unitManager;
+	private UnitManager unitManager_;
 
 	/**
 	 * The constructor method for the class.
@@ -9,7 +9,7 @@ public class ListUnitsCTL {
 	 * Initializes unitManager
 	 */
 	public ListUnitsCTL() {
-		this.unitManager = UnitManager.UM();
+		this.unitManager_ = UnitManager.UM();
 	}
 
 	/**
@@ -19,7 +19,7 @@ public class ListUnitsCTL {
 	 */
 	public void listUnits(IUnitLister lister) {
 		lister.clearUnits();
-		UnitMap units = this.unitManager.getUnits();
+		UnitMap units = this.unitManager_.getUnits();
 		
 		for (String s : units.keySet()) {
 			lister.addUnit(units.get(s));

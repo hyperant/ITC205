@@ -433,12 +433,12 @@ public class cgUI extends javax.swing.JFrame implements IUnitLister, IStudentLis
 		String cS = (String) jComboBox2.getSelectedItem();
 		if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
 			if (cS.equals((String) jComboBox2.getItemAt(0))) {
-				this.sID_ = new Integer(0);
-				ctl_.studentSelected(this.sID_);
+				this.studentID_ = new Integer(0);
+				ctl_.studentSelected(this.studentID_);
 			} else {
-				this.sID_ = new Integer(cS.split("\\s")[0]);
+				this.studentID_ = new Integer(cS.split("\\s")[0]);
 			}
-			ctl_.studentSelected(this.sID_);
+			ctl_.studentSelected(this.studentID_);
 		}
 	}// GEN-LAST:event_jComboBox2ItemStateChanged
 
