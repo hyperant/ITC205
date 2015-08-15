@@ -13,21 +13,21 @@ import javax.swing.DefaultComboBoxModel;
 public class cgUI extends javax.swing.JFrame implements IUnitLister, IStudentLister {
 	private static final long serialVersionUID = 1L;
 	
-	private cgCTL ctl;
-	private DefaultComboBoxModel<String> unitManager;
-	private DefaultComboBoxModel<String> studentManager;
-	private float asg1;
-	private float asg2;
-	private float exam;
-	private Integer sID;
+	private cgCTL ctl_;
+	private DefaultComboBoxModel<String> unitManager_;
+	private DefaultComboBoxModel<String> studentManager_;
+	private float assignment1_;
+	private float assignment2_;
+	private float exam_;
+	private Integer studentID_;
 
 	public cgUI(cgCTL ctl) {
-		this.ctl = ctl;
-		this.unitManager = new DefaultComboBoxModel<String>(new String[0]);
-		this.studentManager = new DefaultComboBoxModel<String>(new String[0]);
+		this.ctl_ = ctl;
+		this.unitManager_ = new DefaultComboBoxModel<String>(new String[0]);
+		this.studentManager_ = new DefaultComboBoxModel<String>(new String[0]);
 		initComponents();
-		jComboBox1.setModel(this.unitManager);
-		jComboBox2.setModel(this.studentManager);
+		jComboBox1.setModel(this.unitManager_);
+		jComboBox2.setModel(this.studentManager_);
 		jlabel6.setText("");
 	}
 
@@ -63,7 +63,7 @@ public class cgUI extends javax.swing.JFrame implements IUnitLister, IStudentLis
 
 		jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Unit"));
 
-		jComboBox1.setModel(this.unitManager);
+		jComboBox1.setModel(this.unitManager_);
 		jComboBox1.addItemListener(new java.awt.event.ItemListener() {
 			public void itemStateChanged(java.awt.event.ItemEvent evt) {
 				jComboBox1ItemStateChanged(evt);
@@ -97,7 +97,7 @@ public class cgUI extends javax.swing.JFrame implements IUnitLister, IStudentLis
 		jPanel2.setBorder(javax.swing.BorderFactory
 				.createTitledBorder("Student"));
 
-		jComboBox2.setModel(this.studentManager);
+		jComboBox2.setModel(this.studentManager_);
 		jComboBox2.addItemListener(new java.awt.event.ItemListener() {
 			public void itemStateChanged(java.awt.event.ItemEvent evt) {
 				jComboBox2ItemStateChanged(evt);
@@ -424,7 +424,7 @@ public class cgUI extends javax.swing.JFrame implements IUnitLister, IStudentLis
 			if (cU.equals((String) jComboBox1.getItemAt(0))) {
 				cU = "NONE";
 			}
-			ctl.unitSelected(cU);
+			ctl_.unitSelected(cU);
 		}
 	}// GEN-LAST:event_jComboBox1ItemStateChanged
 
@@ -433,22 +433,22 @@ public class cgUI extends javax.swing.JFrame implements IUnitLister, IStudentLis
 		String cS = (String) jComboBox2.getSelectedItem();
 		if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
 			if (cS.equals((String) jComboBox2.getItemAt(0))) {
-				this.sID = new Integer(0);
-				ctl.studentSelected(this.sID);
+				this.sID_ = new Integer(0);
+				ctl_.studentSelected(this.sID_);
 			} else {
-				this.sID = new Integer(cS.split("\\s")[0]);
+				this.sID_ = new Integer(cS.split("\\s")[0]);
 			}
-			ctl.studentSelected(this.sID);
+			ctl_.studentSelected(this.sID_);
 		}
 	}// GEN-LAST:event_jComboBox2ItemStateChanged
 
 	private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton3ActionPerformed
-		this.asg1 = new Float(jTextField1.getText()).floatValue();
-		this.asg2 = new Float(jTextField2.getText()).floatValue();
-		this.exam = new Float(jTextField3.getText()).floatValue();
+		this.assignment1_ = new Float(jTextField1.getText()).floatValue();
+		this.assignment2_ = new Float(jTextField2.getText()).floatValue();
+		this.exam_ = new Float(jTextField3.getText()).floatValue();
 		// lblErrMsg.setText("");
 		try {
-			String s = ctl.checkGrade(this.asg1, this.asg2, this.exam);
+			String s = ctl_.checkGrade(this.assignment1_, this.assignment2_, this.exam_);
 			jLabel5.setText(s);
 		} catch (RuntimeException re) {
 			jlabel6.setText(re.getMessage());
@@ -456,7 +456,7 @@ public class cgUI extends javax.swing.JFrame implements IUnitLister, IStudentLis
 	}// GEN-LAST:event_jButton3ActionPerformed
 
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
-		ctl.enableChangeMarks();
+		ctl_.enableChangeMarks();
 		jLabel5.setText("");
 		// lblErrMsg.setText("");
 	}// GEN-LAST:event_jButton1ActionPerformed
@@ -472,7 +472,7 @@ public class cgUI extends javax.swing.JFrame implements IUnitLister, IStudentLis
 		float exam = new Float(jTextField3.getText()).floatValue();
 		jlabel6.setText("");
 		try {
-			ctl.saveGrade(asg1, asg2, exam);
+			ctl_.saveGrade(asg1, asg2, exam);
 			// jButton3ActionPerformed(null);
 		} catch (RuntimeException re) {
 			jlabel6.setText(re.getMessage());
@@ -480,13 +480,13 @@ public class cgUI extends javax.swing.JFrame implements IUnitLister, IStudentLis
 	}// GEN-LAST:event_jButton2ActionPerformed
 
 	public void clearUnits() {
-		this.unitManager.removeAllElements();
-		this.unitManager.addElement("<none selected>");
+		this.unitManager_.removeAllElements();
+		this.unitManager_.addElement("<none selected>");
 		clearStudents();
 	}
 
 	public void addUnit(IUnit u) {
-		this.unitManager.addElement(u.getUnitCode());
+		this.unitManager_.addElement(u.getUnitCode());
 	}
 
 	public void setState1(boolean enabled) {
@@ -495,12 +495,12 @@ public class cgUI extends javax.swing.JFrame implements IUnitLister, IStudentLis
 	}
 
 	public void clearStudents() {
-		this.studentManager.removeAllElements();
-		this.studentManager.addElement("<none selected>");
+		this.studentManager_.removeAllElements();
+		this.studentManager_.addElement("<none selected>");
 	}
 
 	public void addStudent(IStudent student) {
-		this.studentManager.addElement(student.getID().toString() + " : "
+		this.studentManager_.addElement(student.getID().toString() + " : "
 				+ student.getFirstName() + " " + student.getLastName());
 	}
 
