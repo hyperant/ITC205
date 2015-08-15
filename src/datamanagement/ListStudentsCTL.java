@@ -6,7 +6,7 @@ public class ListStudentsCTL {
 	/**
 	 * The constructor method for the class.
 	 * <br />
-	 * Initilizes studentManager
+	 * Initializes studentManager
 	 */
 	public ListStudentsCTL() {
 		this.studentManager = StudentManager.get();
