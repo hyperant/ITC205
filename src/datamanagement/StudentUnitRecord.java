@@ -7,22 +7,22 @@ package datamanagement;
 public class StudentUnitRecord implements IStudentUnitRecord {
 	private Integer studentID_;
 	private String unitCode_;
-	private float asg1_, asg2_, exam_;
+	private float assignment1_, assignment2_, exam_;
 
 	/**
 	 * The constructor method for the class.
 	 * 
 	 * @param studentID the student ID
 	 * @param unitCode the unitCode for the subject
-	 * @param asg1 assignment 1 mark
-	 * @param asg2 assignment 2 mark
+	 * @param assignment1 assignment 1 mark
+	 * @param assignment2 assignment 2 mark
 	 * @param exam exam mark
 	 */
-	public StudentUnitRecord(Integer studentID, String unitCode, float asg1, float asg2, float exam) {
+	public StudentUnitRecord(Integer studentID, String unitCode, float assignment1, float assignment2, float exam) {
 		this.studentID_ = studentID;
 		this.unitCode_ = unitCode;
-		this.setAsg1(asg1);
-		this.setAsg2(asg2);
+		this.setAssignment1(assignment1);
+		this.setAssignment2(assignment2);
 		this.setExam(exam);
 	}
 
@@ -48,17 +48,17 @@ public class StudentUnitRecord implements IStudentUnitRecord {
 	/**
 	 * Sets assignment 1 value
 	 * 
-	 * @param asg1 assignment 1 value
+	 * @param assignment1 assignment 1 value
 	 * @exception RuntimeException on invalid assignment mark
 	 * @see RuntimeException
 	 */
-	public void setAsg1(float asg1) {
-		if (asg1 < 0 || asg1 > UnitManager.UM().getUnit(this.unitCode_).getAsg1Weight()) {
+	public void setAssignment1(float assignment1) {
+		if (assignment1 < 0 || assignment1 > UnitManager.UM().getUnit(this.unitCode_).getAsg1Weight()) {
 			throw new RuntimeException(
 					"Mark cannot be less than zero or greater than assessment weight");
 		}
 		
-		this.asg1_ = asg1;
+		this.assignment1_ = assignment1;
 	}
 
 	/**
@@ -66,8 +66,8 @@ public class StudentUnitRecord implements IStudentUnitRecord {
 	 * 
 	 * @return assignment 1 mark
 	 */
-	public float getAsg1() {
-		return this.asg1_;
+	public float getAssignment1() {
+		return this.assignment1_;
 	}
 
 	/**
@@ -77,13 +77,13 @@ public class StudentUnitRecord implements IStudentUnitRecord {
 	 * @exception RuntimeException on invalid assignment mark
 	 * @see RuntimeException
 	 */
-	public void setAsg2(float asg2) {
-		if (asg2 < 0 || asg2 > UnitManager.UM().getUnit(this.unitCode_).getAsg2Weight()) {
+	public void setAssignment2(float assignment2) {
+		if (assignment2 < 0 || assignment2 > UnitManager.UM().getUnit(this.unitCode_).getAsg2Weight()) {
 			throw new RuntimeException(
 					"Mark cannot be less than zero or greater than assessment weight");
 		}
 		
-		this.asg2_ = asg2;
+		this.assignment2_ = assignment2;
 	}
 
 	/**
@@ -91,8 +91,8 @@ public class StudentUnitRecord implements IStudentUnitRecord {
 	 * 
 	 * @return assignment 2 mark
 	 */
-	public float getAsg2() {
-		return this.asg2_;
+	public float getAssignment2() {
+		return this.assignment2_;
 	}
 
 	/**
@@ -126,6 +126,6 @@ public class StudentUnitRecord implements IStudentUnitRecord {
 	 * @return the sum of assignment 1, assignment 2, and exam
 	 */
 	public float getTotal() {
-		return this.asg1_ + this.asg2_ + this.exam_;
+		return this.assignment1_ + this.assignment2_ + this.exam_;
 	}
 }

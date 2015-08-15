@@ -141,8 +141,8 @@ public class cgCTL {
 		IStudent studentManager = StudentManager.get().getStudent(this.currentStudentID_);
 		
 		IStudentUnitRecord studentRecord = studentManager.getUnitRecord(this.unitCode_);
-		studentRecord.setAsg1(assignment1);
-		studentRecord.setAsg2(assignment2);
+		studentRecord.setAssignment1(assignment1);
+		studentRecord.setAssignment2(assignment2);
 		studentRecord.setExam(exam);
 		StudentUnitRecordManager.instance().saveRecord(studentRecord);
 		
