@@ -1,30 +1,33 @@
 package datamanagement;
+
 import javax.swing.JLabel;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
 import java.awt.Font;
 import java.awt.Color;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
-public class cgUI extends javax.swing.JFrame implements IUnitLister,
-		IStudentLister {
-	private cgCTL ctl;
-	private javax.swing.DefaultComboBoxModel uM;
-	private javax.swing.DefaultComboBoxModel rM;
-	float f1;
-	float f2;
-	float f3;
-	Integer sid;
+import javax.swing.DefaultComboBoxModel;
+
+public class cgUI extends javax.swing.JFrame implements IUnitLister, IStudentLister {
+	private static final long serialVersionUID = 1L;
+	
+	private cgCTL ctl_;
+	private DefaultComboBoxModel<String> unitManager_;
+	private DefaultComboBoxModel<String> studentManager_;
+	private float assignment1_;
+	private float assignment2_;
+	private float exam_;
+	private Integer studentID_;
 
 	public cgUI(cgCTL ctl) {
-		this.ctl = ctl;
-		uM = new javax.swing.DefaultComboBoxModel(new String[0]);
-		rM = new javax.swing.DefaultComboBoxModel(new String[0]);
+		this.ctl_ = ctl;
+		this.unitManager_ = new DefaultComboBoxModel<String>(new String[0]);
+		this.studentManager_ = new DefaultComboBoxModel<String>(new String[0]);
 		initComponents();
-		jComboBox1.setModel(uM);
-		jComboBox2.setModel(rM);
+		jComboBox1.setModel(this.unitManager_);
+		jComboBox2.setModel(this.studentManager_);
 		jlabel6.setText("");
 	}
 
@@ -39,9 +42,9 @@ public class cgUI extends javax.swing.JFrame implements IUnitLister,
 
 		jLabel1 = new javax.swing.JLabel();
 		jPanel1 = new javax.swing.JPanel();
-		jComboBox1 = new javax.swing.JComboBox();
+		jComboBox1 = new javax.swing.JComboBox<String>();
 		jPanel2 = new javax.swing.JPanel();
-		jComboBox2 = new javax.swing.JComboBox();
+		jComboBox2 = new javax.swing.JComboBox<String>();
 		jPanel3 = new javax.swing.JPanel();
 		jLabel2 = new javax.swing.JLabel();
 		jLabel3 = new javax.swing.JLabel();
@@ -60,7 +63,7 @@ public class cgUI extends javax.swing.JFrame implements IUnitLister,
 
 		jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Unit"));
 
-		jComboBox1.setModel(uM);
+		jComboBox1.setModel(this.unitManager_);
 		jComboBox1.addItemListener(new java.awt.event.ItemListener() {
 			public void itemStateChanged(java.awt.event.ItemEvent evt) {
 				jComboBox1ItemStateChanged(evt);
@@ -94,7 +97,7 @@ public class cgUI extends javax.swing.JFrame implements IUnitLister,
 		jPanel2.setBorder(javax.swing.BorderFactory
 				.createTitledBorder("Student"));
 
-		jComboBox2.setModel(rM);
+		jComboBox2.setModel(this.studentManager_);
 		jComboBox2.addItemListener(new java.awt.event.ItemListener() {
 			public void itemStateChanged(java.awt.event.ItemEvent evt) {
 				jComboBox2ItemStateChanged(evt);
@@ -161,58 +164,111 @@ public class cgUI extends javax.swing.JFrame implements IUnitLister,
 			}
 		});
 		jButton2 = new javax.swing.JButton();
-		
-				jButton2.setText("Check Grade");
-				jButton2.setActionCommand("checkGrade");
-				jButton2.addActionListener(new java.awt.event.ActionListener() {
-					public void actionPerformed(java.awt.event.ActionEvent evt) {
-						jButton3ActionPerformed(evt);
-					}
-				});
+
+		jButton2.setText("Check Grade");
+		jButton2.setActionCommand("checkGrade");
+		jButton2.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jButton3ActionPerformed(evt);
+			}
+		});
 
 		javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(
 				jPanel3);
-		jPanel3Layout.setHorizontalGroup(
-			jPanel3Layout.createParallelGroup(Alignment.LEADING)
-				.addGroup(jPanel3Layout.createSequentialGroup()
-					.addGroup(jPanel3Layout.createParallelGroup(Alignment.LEADING)
-						.addGroup(jPanel3Layout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(jLabel2)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(jLabel3))
-						.addGroup(jPanel3Layout.createSequentialGroup()
-							.addGap(85)
-							.addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)))
-					.addGap(18)
-					.addGroup(jPanel3Layout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(jPanel3Layout.createSequentialGroup()
-							.addComponent(jTextField2, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(jLabel4))
-						.addComponent(jButton2))
-					.addGap(18)
-					.addComponent(jTextField3, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
-					.addGap(15))
-		);
-		jPanel3Layout.setVerticalGroup(
-			jPanel3Layout.createParallelGroup(Alignment.LEADING)
-				.addGroup(jPanel3Layout.createSequentialGroup()
-					.addGroup(jPanel3Layout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(jLabel2)
-						.addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(jLabel3)
-						.addComponent(jTextField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(jLabel4)
-						.addComponent(jTextField3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(jPanel3Layout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(jButton1)
-						.addComponent(jButton2))
-					.addContainerGap())
-		);
+		jPanel3Layout
+				.setHorizontalGroup(jPanel3Layout
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								jPanel3Layout
+										.createSequentialGroup()
+										.addGroup(
+												jPanel3Layout
+														.createParallelGroup(
+																Alignment.LEADING)
+														.addGroup(
+																jPanel3Layout
+																		.createSequentialGroup()
+																		.addContainerGap()
+																		.addComponent(
+																				jLabel2)
+																		.addPreferredGap(
+																				ComponentPlacement.RELATED)
+																		.addComponent(
+																				jTextField1,
+																				GroupLayout.PREFERRED_SIZE,
+																				59,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addGap(18)
+																		.addComponent(
+																				jLabel3))
+														.addGroup(
+																jPanel3Layout
+																		.createSequentialGroup()
+																		.addGap(85)
+																		.addComponent(
+																				jButton1,
+																				GroupLayout.PREFERRED_SIZE,
+																				84,
+																				GroupLayout.PREFERRED_SIZE)))
+										.addGap(18)
+										.addGroup(
+												jPanel3Layout
+														.createParallelGroup(
+																Alignment.TRAILING)
+														.addGroup(
+																jPanel3Layout
+																		.createSequentialGroup()
+																		.addComponent(
+																				jTextField2,
+																				GroupLayout.PREFERRED_SIZE,
+																				59,
+																				GroupLayout.PREFERRED_SIZE)
+																		.addGap(18)
+																		.addComponent(
+																				jLabel4))
+														.addComponent(jButton2))
+										.addGap(18)
+										.addComponent(jTextField3,
+												GroupLayout.PREFERRED_SIZE, 59,
+												GroupLayout.PREFERRED_SIZE)
+										.addGap(15)));
+		jPanel3Layout
+				.setVerticalGroup(jPanel3Layout
+						.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								jPanel3Layout
+										.createSequentialGroup()
+										.addGroup(
+												jPanel3Layout
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(jLabel2)
+														.addComponent(
+																jTextField1,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(jLabel3)
+														.addComponent(
+																jTextField2,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(jLabel4)
+														.addComponent(
+																jTextField3,
+																GroupLayout.PREFERRED_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(
+												ComponentPlacement.UNRELATED)
+										.addGroup(
+												jPanel3Layout
+														.createParallelGroup(
+																Alignment.BASELINE)
+														.addComponent(jButton1)
+														.addComponent(jButton2))
+										.addContainerGap()));
 		jPanel3.setLayout(jPanel3Layout);
 
 		jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Grade"));
@@ -234,67 +290,127 @@ public class cgUI extends javax.swing.JFrame implements IUnitLister,
 				jPanel4Layout.createSequentialGroup().addGap(34, 34, 34)
 						.addComponent(jLabel5)
 						.addContainerGap(43, Short.MAX_VALUE)));
-		
+
 		jlabel6 = new JLabel();
 		jlabel6.setText("Error message");
 		jlabel6.setForeground(Color.RED);
 		jlabel6.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		jButton3 = new javax.swing.JButton();
-		
-				jButton3.setText("Save");
-				jButton3.addActionListener(new java.awt.event.ActionListener() {
-					public void actionPerformed(java.awt.event.ActionEvent evt) {
-						jButton2ActionPerformed(evt);
-					}
-				});
+
+		jButton3.setText("Save");
+		jButton3.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jButton2ActionPerformed(evt);
+			}
+		});
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
 				getContentPane());
-		layout.setHorizontalGroup(
-			layout.createParallelGroup(Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-					.addGroup(layout.createParallelGroup(Alignment.LEADING)
-						.addGroup(layout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(jlabel6, GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE))
-						.addGroup(layout.createSequentialGroup()
-							.addContainerGap()
-							.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(jPanel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addGroup(layout.createSequentialGroup()
-									.addGroup(layout.createParallelGroup(Alignment.LEADING)
-										.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-									.addGap(18)
-									.addComponent(jPanel4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-						.addGroup(layout.createSequentialGroup()
-							.addGap(157)
-							.addComponent(jLabel1))
-						.addGroup(layout.createSequentialGroup()
-							.addGap(165)
-							.addComponent(jButton3, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap())
-		);
-		layout.setVerticalGroup(
-			layout.createParallelGroup(Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(jLabel1)
-					.addGap(13)
-					.addGroup(layout.createParallelGroup(Alignment.LEADING)
-						.addGroup(layout.createSequentialGroup()
-							.addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addComponent(jPanel4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addComponent(jPanel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(jButton3)
-					.addGap(11)
-					.addComponent(jlabel6, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-		);
+		layout.setHorizontalGroup(layout
+				.createParallelGroup(Alignment.LEADING)
+				.addGroup(
+						layout.createSequentialGroup()
+								.addGroup(
+										layout.createParallelGroup(
+												Alignment.LEADING)
+												.addGroup(
+														layout.createSequentialGroup()
+																.addContainerGap()
+																.addComponent(
+																		jlabel6,
+																		GroupLayout.DEFAULT_SIZE,
+																		400,
+																		Short.MAX_VALUE))
+												.addGroup(
+														layout.createSequentialGroup()
+																.addContainerGap()
+																.addGroup(
+																		layout.createParallelGroup(
+																				Alignment.LEADING,
+																				false)
+																				.addComponent(
+																						jPanel3,
+																						GroupLayout.DEFAULT_SIZE,
+																						GroupLayout.DEFAULT_SIZE,
+																						Short.MAX_VALUE)
+																				.addGroup(
+																						layout.createSequentialGroup()
+																								.addGroup(
+																										layout.createParallelGroup(
+																												Alignment.LEADING)
+																												.addComponent(
+																														jPanel1,
+																														GroupLayout.PREFERRED_SIZE,
+																														GroupLayout.DEFAULT_SIZE,
+																														GroupLayout.PREFERRED_SIZE)
+																												.addComponent(
+																														jPanel2,
+																														GroupLayout.PREFERRED_SIZE,
+																														GroupLayout.DEFAULT_SIZE,
+																														GroupLayout.PREFERRED_SIZE))
+																								.addGap(18)
+																								.addComponent(
+																										jPanel4,
+																										GroupLayout.PREFERRED_SIZE,
+																										GroupLayout.DEFAULT_SIZE,
+																										GroupLayout.PREFERRED_SIZE))))
+												.addGroup(
+														layout.createSequentialGroup()
+																.addGap(157)
+																.addComponent(
+																		jLabel1))
+												.addGroup(
+														layout.createSequentialGroup()
+																.addGap(165)
+																.addComponent(
+																		jButton3,
+																		GroupLayout.PREFERRED_SIZE,
+																		86,
+																		GroupLayout.PREFERRED_SIZE)))
+								.addContainerGap()));
+		layout.setVerticalGroup(layout
+				.createParallelGroup(Alignment.LEADING)
+				.addGroup(
+						layout.createSequentialGroup()
+								.addContainerGap()
+								.addComponent(jLabel1)
+								.addGap(13)
+								.addGroup(
+										layout.createParallelGroup(
+												Alignment.LEADING)
+												.addGroup(
+														layout.createSequentialGroup()
+																.addComponent(
+																		jPanel1,
+																		GroupLayout.PREFERRED_SIZE,
+																		GroupLayout.DEFAULT_SIZE,
+																		GroupLayout.PREFERRED_SIZE)
+																.addPreferredGap(
+																		ComponentPlacement.RELATED)
+																.addComponent(
+																		jPanel2,
+																		GroupLayout.PREFERRED_SIZE,
+																		GroupLayout.DEFAULT_SIZE,
+																		GroupLayout.PREFERRED_SIZE))
+												.addComponent(
+														jPanel4,
+														GroupLayout.PREFERRED_SIZE,
+														GroupLayout.DEFAULT_SIZE,
+														GroupLayout.PREFERRED_SIZE))
+								.addPreferredGap(ComponentPlacement.RELATED,
+										GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE)
+								.addComponent(jPanel3,
+										GroupLayout.PREFERRED_SIZE,
+										GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(jButton3)
+								.addGap(11)
+								.addComponent(jlabel6,
+										GroupLayout.PREFERRED_SIZE, 30,
+										GroupLayout.PREFERRED_SIZE)
+								.addContainerGap()));
 		getContentPane().setLayout(layout);
 
 		pack();
@@ -308,7 +424,7 @@ public class cgUI extends javax.swing.JFrame implements IUnitLister,
 			if (cU.equals((String) jComboBox1.getItemAt(0))) {
 				cU = "NONE";
 			}
-			ctl.unitSelected(cU);
+			ctl_.unitSelected(cU);
 		}
 	}// GEN-LAST:event_jComboBox1ItemStateChanged
 
@@ -317,33 +433,32 @@ public class cgUI extends javax.swing.JFrame implements IUnitLister,
 		String cS = (String) jComboBox2.getSelectedItem();
 		if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
 			if (cS.equals((String) jComboBox2.getItemAt(0))) {
-				sid = new Integer(0);
-				ctl.studentSelected(sid);
+				this.studentID_ = new Integer(0);
+				ctl_.studentSelected(this.studentID_);
 			} else {
-				sid = new Integer(cS.split("\\s")[0]);
+				this.studentID_ = new Integer(cS.split("\\s")[0]);
 			}
-			ctl.studentSelected(sid);
+			ctl_.studentSelected(this.studentID_);
 		}
 	}// GEN-LAST:event_jComboBox2ItemStateChanged
 
 	private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton3ActionPerformed
-		f1 = new Float(jTextField1.getText()).floatValue();
-		f2 = new Float(jTextField2.getText()).floatValue();
-		f3 = new Float(jTextField3.getText()).floatValue();
-		//lblErrMsg.setText("");
+		this.assignment1_ = new Float(jTextField1.getText()).floatValue();
+		this.assignment2_ = new Float(jTextField2.getText()).floatValue();
+		this.exam_ = new Float(jTextField3.getText()).floatValue();
+		// lblErrMsg.setText("");
 		try {
-			String s = ctl.checkGrade(f1, f2, f3);
+			String s = ctl_.checkGrade(this.assignment1_, this.assignment2_, this.exam_);
 			jLabel5.setText(s);
-		}
-		catch (RuntimeException re) {
+		} catch (RuntimeException re) {
 			jlabel6.setText(re.getMessage());
 		}
 	}// GEN-LAST:event_jButton3ActionPerformed
 
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
-		ctl.enableChangeMarks();
+		ctl_.enableChangeMarks();
 		jLabel5.setText("");
-		//lblErrMsg.setText("");
+		// lblErrMsg.setText("");
 	}// GEN-LAST:event_jButton1ActionPerformed
 
 	private void jTextFieldKeyTyped(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextField1KeyTyped
@@ -357,47 +472,46 @@ public class cgUI extends javax.swing.JFrame implements IUnitLister,
 		float exam = new Float(jTextField3.getText()).floatValue();
 		jlabel6.setText("");
 		try {
-			ctl.saveGrade(asg1, asg2, exam);
-			//jButton3ActionPerformed(null);
-		}
-		catch (RuntimeException re) {
+			ctl_.saveGrade(asg1, asg2, exam);
+			// jButton3ActionPerformed(null);
+		} catch (RuntimeException re) {
 			jlabel6.setText(re.getMessage());
 		}
 	}// GEN-LAST:event_jButton2ActionPerformed
 
 	public void clearUnits() {
-		uM.removeAllElements();
-		uM.addElement("<none selected>");
+		this.unitManager_.removeAllElements();
+		this.unitManager_.addElement("<none selected>");
 		clearStudents();
 	}
 
 	public void addUnit(IUnit u) {
-		uM.addElement(u.getUnitCode());
+		this.unitManager_.addElement(u.getUnitCode());
 	}
 
-	public void setState1(boolean b) {
-		jComboBox1.setEnabled(b);
+	public void setState1(boolean enabled) {
+		jComboBox1.setEnabled(enabled);
 		jlabel6.setText("");
 	}
 
 	public void clearStudents() {
-		rM.removeAllElements();
-		rM.addElement("<none selected>");
+		this.studentManager_.removeAllElements();
+		this.studentManager_.addElement("<none selected>");
 	}
 
 	public void addStudent(IStudent student) {
-		rM.addElement(student.getID().toString() + " : "
+		this.studentManager_.addElement(student.getID().toString() + " : "
 				+ student.getFirstName() + " " + student.getLastName());
 	}
 
-	public void setState2(boolean b) {
-		jComboBox2.setEnabled(b);
+	public void setState2(boolean enabled) {
+		jComboBox2.setEnabled(enabled);
 		jlabel6.setText("");
 	}
 
 	public void setRecord(IStudentUnitRecord record) {
-		jTextField1.setText(new Float(record.getAsg1()).toString());
-		jTextField2.setText(new Float(record.getAsg2()).toString());
+		jTextField1.setText(new Float(record.getAssignment1()).toString());
+		jTextField2.setText(new Float(record.getAssignment2()).toString());
 		jTextField3.setText(new Float(record.getExam()).toString());
 		jLabel5.setText("");
 	}
@@ -413,31 +527,31 @@ public class cgUI extends javax.swing.JFrame implements IUnitLister,
 		jTextField3.setEditable(false);
 	}
 
-	public void setState3(boolean b) {
-		jButton2.setEnabled(b);
+	public void setState3(boolean enabled) {
+		jButton2.setEnabled(enabled);
 	}
 
-	public void setState4(boolean b) {
-		jButton1.setEnabled(b);
+	public void setState4(boolean enabled) {
+		jButton1.setEnabled(enabled);
 		// gradeLB.setText("");
 	}
 
-	public void setState5(boolean b) {
-		jTextField1.setEditable(b);
-		jTextField2.setEditable(b);
-		jTextField3.setEditable(b);
+	public void setState5(boolean enabled) {
+		jTextField1.setEditable(enabled);
+		jTextField2.setEditable(enabled);
+		jTextField3.setEditable(enabled);
 	}
 
-	public void setState6(boolean b) {
-		jButton3.setEnabled(b);
+	public void setState6(boolean enabled) {
+		jButton3.setEnabled(enabled);
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JButton jButton1;
 	private javax.swing.JButton jButton2;
 	private javax.swing.JButton jButton3;
-	private javax.swing.JComboBox jComboBox1;
-	private javax.swing.JComboBox jComboBox2;
+	private javax.swing.JComboBox<String> jComboBox1;
+	private javax.swing.JComboBox<String> jComboBox2;
 	private javax.swing.JLabel jLabel1;
 	private javax.swing.JLabel jLabel2;
 	private javax.swing.JLabel jLabel3;
