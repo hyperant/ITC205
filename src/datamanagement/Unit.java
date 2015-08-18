@@ -10,10 +10,10 @@ public class Unit implements IUnit {
 	private float additionalExaminationCutoff_;
 	private int assignment1Weight_, assignment2Weight_, examWeight_;
 
-	private StudentUnitRecordList studentUnitRecordList_;
+	private StudentUnitRecordList rs;
 
 	public Unit(String unitCode, String unitNumber, float passCutoff, float creditCutoff, float distinctionCutoff, float highDistinctionCutoff,
-			float additionalExaminationCutoff, int assignment1Weight, int assignment2Weight, int examWeight, StudentUnitRecordList studentUnitRecordList) {
+			float additionalExaminationCutoff, int assignment1Weight, int assignment2Weight, int examWeight, StudentUnitRecordList rl) {
 
 		unitCode_ = unitCode;
 		unitName_ = unitNumber;
@@ -23,11 +23,7 @@ public class Unit implements IUnit {
 		highDistinctionCutoff_ = highDistinctionCutoff;
 		additionalExaminationCutoff_ = additionalExaminationCutoff;
 		setAssessmentWeights(assignment1Weight, assignment2Weight, examWeight);
-		if (studentUnitRecordList == null) {
-			studentUnitRecordList_ = new StudentUnitRecordList();
-		} else {
-			studentUnitRecordList_ = studentUnitRecordList;
-		}
+		rs = rl == null ? new StudentUnitRecordList() : rl;
 	}
 
 	public String getUnitCode() {
@@ -81,11 +77,11 @@ public class Unit implements IUnit {
 	}
 
 	public void addStudentRecord(IStudentUnitRecord record) {
-		studentUnitRecordList_.add(record);
+		rs.add(record);
 	}
 
 	public IStudentUnitRecord getStudentRecord(int studentID) {
-		for (IStudentUnitRecord r : studentUnitRecordList_) {
+		for (IStudentUnitRecord r : rs) {
 			if (r.getStudentID() == studentID)
 				return r;
 		}
@@ -93,7 +89,7 @@ public class Unit implements IUnit {
 	}
 
 	public StudentUnitRecordList listStudentRecords() {
-		return studentUnitRecordList_;
+		return rs;
 	}
 
 	@Override
@@ -113,11 +109,11 @@ public class Unit implements IUnit {
 
 	@Override
 	public void setAssessmentWeights(int assignment1Weight, int assignment2Weight, int examWeight) {
-		if (assignment1Weight < 0 || assignment1Weight > 100 || assignment2Weight < 0 || assignment2Weight > 100 || examWeight_< 0 || examWeight > 100) {
+		if (assignment1Weight < 0 || assignment1Weight > 100 || assignment2Weight < 0 || assignment2Weight > 100 || examWeight< 0 || examWeight > 100) {
 			throw new RuntimeException(
 					"Assessment weights cant be less than zero or greater than 100");
 		}
-		if (assignment1Weight_ + assignment2Weight_ + examWeight_ != 100) {
+		if (assignment1Weight + assignment2Weight + examWeight != 100) {
 			throw new RuntimeException("Assessment weights must add to 100");
 		}
 		this.assignment1Weight_ = assignment1Weight;
