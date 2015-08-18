@@ -46,4 +46,28 @@ public class StudentUnitRecordProxy implements IStudentUnitRecord {
 	public float getTotal() {
 		return recordManager.getStudentUnitRecord(studentID, unitCode).getTotal();
 	}
+
+	@Override
+	public void setAssignment1(float mark) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public float getAssignment1() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setAssignment2(float mark) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public float getAssignment2() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
