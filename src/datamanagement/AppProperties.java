@@ -5,7 +5,7 @@ import java.io.*;
 
 public class AppProperties {
 	private static AppProperties self = null;
-	private Properties properties;
+	private Properties properties_;
 
 	public static AppProperties getInstance() {
 		if (self == null) {
@@ -16,10 +16,10 @@ public class AppProperties {
 	}
 
 	private AppProperties() {
-		properties = new Properties();
+		properties_ = new Properties();
 		
 		try {
-			properties.load(new FileInputStream("Properties.prop"));
+			properties_.load(new FileInputStream("Properties.prop"));
 		}
 		
 		catch (IOException e) {
@@ -28,6 +28,6 @@ public class AppProperties {
 	}
 
 	public Properties getProperties() {
-		return properties;
+		return properties_;
 	}
 }
