@@ -1,50 +1,50 @@
 package datamanagement;
 
 public class StudentUnitRecordProxy implements IStudentUnitRecord {
-	private Integer studentID;
-	private String unitCode;
+	private Integer studentID_;
+	private String unitCode_;
 	private StudentUnitRecordManager recordManager;
 
 	public StudentUnitRecordProxy(Integer studentID, String unitCode) {
-		this.studentID = studentID;
-		this.unitCode = unitCode;
+		this.studentID_ = studentID;
+		this.unitCode_ = unitCode;
 		this.recordManager = StudentUnitRecordManager.instance();
 	}
 
 	public Integer getStudentID() {
-		return studentID;
+		return studentID_;
 	}
 
 	public String getUnitCode() {
-		return unitCode;
+		return unitCode_;
 	}
 
 	public void setAsg1(float mark) {
-		recordManager.getStudentUnitRecord(studentID, unitCode).setAssignment1(mark);
+		recordManager.getStudentUnitRecord(studentID_, unitCode_).setAssignment1(mark);
 	}
 
 	public float getAsg1() {
-		return recordManager.getStudentUnitRecord(studentID, unitCode).getAssignment1();
+		return recordManager.getStudentUnitRecord(studentID_, unitCode_).getAssignment1();
 	}
 
 	public void setAsg2(float mark) {
-		recordManager.getStudentUnitRecord(studentID, unitCode).setAssignment2(mark);
+		recordManager.getStudentUnitRecord(studentID_, unitCode_).setAssignment2(mark);
 	}
 
 	public float getAsg2() {
-		return recordManager.getStudentUnitRecord(studentID, unitCode).getAssignment2();
+		return recordManager.getStudentUnitRecord(studentID_, unitCode_).getAssignment2();
 	}
 
 	public void setExam(float mark) {
-		recordManager.getStudentUnitRecord(studentID, unitCode).setExam(mark);
+		recordManager.getStudentUnitRecord(studentID_, unitCode_).setExam(mark);
 	}
 
 	public float getExam() {
-		return recordManager.getStudentUnitRecord(studentID, unitCode).getExam();
+		return recordManager.getStudentUnitRecord(studentID_, unitCode_).getExam();
 	}
 
 	public float getTotal() {
-		return recordManager.getStudentUnitRecord(studentID, unitCode).getTotal();
+		return recordManager.getStudentUnitRecord(studentID_, unitCode_).getTotal();
 	}
 
 	@Override

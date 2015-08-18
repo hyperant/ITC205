@@ -1,37 +1,37 @@
 package datamanagement;
 
 public class Student implements IStudent {
-	private Integer studentID;
-	private String firstName;
-	private String lastName;
+	private Integer studentID_;
+	private String firstName_;
+	private String lastName_;
 	private StudentUnitRecordList studentUnit;
 
 	public Student(Integer studentID, String firstName, String lastName, StudentUnitRecordList studentUnit) {
-		this.studentID = studentID;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.studentID_ = studentID;
+		this.firstName_ = firstName;
+		this.lastName_ = lastName;
 		this.studentUnit = studentUnit == null ? new StudentUnitRecordList() : studentUnit;
 	}
 
 	public Integer getStudentID() {
-		return this.studentID;
+		return this.studentID_;
 	}
 
 	public String getFirstName() {
-		return firstName;
+		return firstName_;
 	}
 
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		this.firstName_ = firstName;
 	}
 
 	public String getLastName() {
-		return lastName;
+		return lastName_;
 	}
 
 	public void setLastName(String lastName) {
 
-		this.lastName = lastName;
+		this.lastName_ = lastName;
 	}
 
 	public void addUnitRecord(IStudentUnitRecord record) {

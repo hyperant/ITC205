@@ -30,7 +30,7 @@ public class StudentManager {
 	@SuppressWarnings("unchecked")
 	private Element getStudentElement(Integer studentID) {
 		for (Element studentElement : (List<Element>) XMLManager.getXML().getDocument().getRootElement().getChild("studentTable").getChildren("student"))
-			if (studentID.toString().equals(studentElement.getAttributeValue("sid")))
+			if (studentID.toString().equals(studentElement.getAttributeValue("studentID")))
 				return studentElement;
 		return null;
 	}
@@ -39,9 +39,9 @@ public class StudentManager {
 		IStudent student;
 		Element studentElement = getStudentElement(studentID);
 		if (studentElement != null) {
-			StudentUnitRecordList rlist = StudentUnitRecordManager.instance().getRecordsByStudent(studentID);
-			student = new Student(new Integer(studentElement.getAttributeValue("sid")), studentElement.getAttributeValue("fname"),
-					studentElement.getAttributeValue("lname"), rlist);
+			StudentUnitRecordList recordList = StudentUnitRecordManager.instance().getRecordsByStudent(studentID);
+			student = new Student(new Integer(studentElement.getAttributeValue("studentID")), studentElement.getAttributeValue("firstName"),
+					studentElement.getAttributeValue("lastName"), recordList);
 
 			studentMap.put(student.getID(), student);
 			return student;
@@ -53,7 +53,7 @@ public class StudentManager {
 		Element studentElement = getStudentElement(studentID);
 
 		if (studentElement != null)
-			return new StudentProxy(studentID, studentElement.getAttributeValue("fname"), studentElement.getAttributeValue("lname"));
+			return new StudentProxy(studentID, studentElement.getAttributeValue("firstName"), studentElement.getAttributeValue("lastName"));
 		throw new RuntimeException("DBMD: createStudent : student not in file");
 	}
 
