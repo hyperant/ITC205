@@ -32,9 +32,9 @@ public interface IUnit {
 
 	public int getExamWeight();
 
-	public void setAssessmentWeights(int asg1Wgt, int asg2Wgt, int examWgt);
+	public void setAssessmentWeights(int assignment1Weight, int assignment2Weight, int examWeight);
 
-	public String getGrade(float asg1, float asg2, float exam);
+	public String getGrade(float assignment1Mark, float assignment2Mark, float examMark);
 
 	public void addStudentRecord(IStudentUnitRecord record);
 
