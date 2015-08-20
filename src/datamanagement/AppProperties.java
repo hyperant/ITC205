@@ -16,7 +16,7 @@ public class AppProperties {
 	}
 
 	private AppProperties() {
-		properties_ = new Properties();
+		this.properties_ = new Properties();
 		
 		try {
 			properties_.load(new FileInputStream("Properties.prop"));

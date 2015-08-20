@@ -2,12 +2,13 @@ package datamanagement;
 
 import org.jdom.*;
 import java.util.List;
+import java.util.HashMap;
 
 public class StudentManager {
 	private static StudentManager self = null;
 
-	private StudentMap studentMap;
-	private java.util.HashMap<String, StudentMap> unitMap;
+	private StudentMap studentMap_;
+	private HashMap<String, StudentMap> unitMap_;
 
 	public static StudentManager get() {
 		if (self == null)
@@ -18,20 +19,22 @@ public class StudentManager {
 
 	private StudentManager() {
 
-		studentMap = new StudentMap();
-		unitMap = new java.util.HashMap<>();
+		this.studentMap_ = new StudentMap();
+		this.unitMap_ = new HashMap<>();
 	}
 
 	public IStudent getStudent(Integer studentID) {
-		IStudent student = studentMap.get(studentID);
+		IStudent student = this.studentMap_.get(studentID);
 		return student != null ? student : createStudent(studentID);
 	}
 
 	@SuppressWarnings("unchecked")
 	private Element getStudentElement(Integer studentID) {
-		for (Element studentElement : (List<Element>) XMLManager.getXML().getDocument().getRootElement().getChild("studentTable").getChildren("student"))
-			if (studentID.toString().equals(studentElement.getAttributeValue("studentID")))
+		for (Element studentElement : ((List<Element>) XMLManager.getXML().getDocument().getRootElement().getChild("studentTable").getChildren("student"))){
+			if (studentID.toString().equals(studentElement.getAttributeValue("studentID"))){
 				return studentElement;
+			}
+		}
 		return null;
 	}
 
@@ -43,7 +46,7 @@ public class StudentManager {
 			student = new Student(new Integer(studentElement.getAttributeValue("studentID")), studentElement.getAttributeValue("firstName"),
 					studentElement.getAttributeValue("lastName"), recordList);
 
-			studentMap.put(student.getID(), student);
+			this.studentMap_.put(student.getID(), student);
 			return student;
 		}
 		throw new RuntimeException("DBMD: createStudent : student not in file");
@@ -58,7 +61,7 @@ public class StudentManager {
 	}
 
 	public StudentMap getStudentsByUnit(String unitCode) {
-		StudentMap studentRecord = unitMap.get(unitCode);
+		StudentMap studentRecord = unitMap_.get(unitCode);
 		if (studentRecord != null) {
 
 			return studentRecord;
@@ -72,7 +75,7 @@ public class StudentManager {
 			student = createStudentProxy(new Integer(studentUnitRecord.getStudentID()));
 			studentRecord.put(student.getID(), student);
 		}
-		unitMap.put(unitCode, studentRecord);
+		unitMap_.put(unitCode, studentRecord);
 		return studentRecord;
 	}
 }

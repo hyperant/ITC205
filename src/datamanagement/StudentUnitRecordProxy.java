@@ -3,48 +3,48 @@ package datamanagement;
 public class StudentUnitRecordProxy implements IStudentUnitRecord {
 	private Integer studentID_;
 	private String unitCode_;
-	private StudentUnitRecordManager recordManager;
+	private StudentUnitRecordManager recordManager_;
 
 	public StudentUnitRecordProxy(Integer studentID, String unitCode) {
 		this.studentID_ = studentID;
 		this.unitCode_ = unitCode;
-		this.recordManager = StudentUnitRecordManager.instance();
+		this.recordManager_ = StudentUnitRecordManager.instance();
 	}
 
 	public Integer getStudentID() {
-		return studentID_;
+		return this.studentID_;
 	}
 
 	public String getUnitCode() {
-		return unitCode_;
+		return this.unitCode_;
 	}
 
-	public void setAsg1(float mark) {
-		recordManager.getStudentUnitRecord(studentID_, unitCode_).setAssignment1(mark);
+	public void setAssignmentOne(float mark) {
+		this.recordManager_.getStudentUnitRecord(studentID_, unitCode_).setAssignment1(mark);
 	}
 
-	public float getAsg1() {
-		return recordManager.getStudentUnitRecord(studentID_, unitCode_).getAssignment1();
+	public float getAssignmentOne() {
+		return this.recordManager_.getStudentUnitRecord(studentID_, unitCode_).getAssignment1();
 	}
 
-	public void setAsg2(float mark) {
-		recordManager.getStudentUnitRecord(studentID_, unitCode_).setAssignment2(mark);
+	public void setAssignmentTwo(float mark) {
+		this.recordManager_.getStudentUnitRecord(studentID_, unitCode_).setAssignment2(mark);
 	}
 
-	public float getAsg2() {
-		return recordManager.getStudentUnitRecord(studentID_, unitCode_).getAssignment2();
+	public float getAssignmentTwo() {
+		return this.recordManager_.getStudentUnitRecord(studentID_, unitCode_).getAssignment2();
 	}
 
 	public void setExam(float mark) {
-		recordManager.getStudentUnitRecord(studentID_, unitCode_).setExam(mark);
+		this.recordManager_.getStudentUnitRecord(studentID_, unitCode_).setExam(mark);
 	}
 
 	public float getExam() {
-		return recordManager.getStudentUnitRecord(studentID_, unitCode_).getExam();
+		return this.recordManager_.getStudentUnitRecord(studentID_, unitCode_).getExam();
 	}
 
 	public float getTotal() {
-		return recordManager.getStudentUnitRecord(studentID_, unitCode_).getTotal();
+		return this.recordManager_.getStudentUnitRecord(studentID_, unitCode_).getTotal();
 	}
 
 	@Override
