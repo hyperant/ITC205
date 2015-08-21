@@ -32,9 +32,7 @@ public class UnitManager {
 		for (Object unitElement : (List<?>) XMLManager.getXML().getDocument()
 				.getRootElement().getChild("unitTable").getChildren("unit"))
 			if (unitCode.equals(((Element) unitElement).getAttributeValue("uid"))) {
-				StudentUnitRecordList studentUnitRecordList;
 
-				studentUnitRecordList = null;
 				iUnit = new Unit(((Element) unitElement).getAttributeValue("uid"),
 						((Element) unitElement).getAttributeValue("name"), Float.valueOf(
 								((Element) unitElement).getAttributeValue("ps")).floatValue(), Float
