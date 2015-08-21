@@ -29,25 +29,25 @@ public class UnitManager {
 
 		IUnit iUnit;
 
-		for (Element el : (List<Element>) XMLManager.getXML().getDocument()
+		for (Object unitElement : (List<?>) XMLManager.getXML().getDocument()
 				.getRootElement().getChild("unitTable").getChildren("unit"))
-			if (unitCode.equals(el.getAttributeValue("uid"))) {
+			if (unitCode.equals(((Element) unitElement).getAttributeValue("uid"))) {
 				StudentUnitRecordList studentUnitRecordList;
 
 				studentUnitRecordList = null;
-				iUnit = new Unit(el.getAttributeValue("uid"),
-						el.getAttributeValue("name"), Float.valueOf(
-								el.getAttributeValue("ps")).floatValue(), Float
-								.valueOf(el.getAttributeValue("cr"))
+				iUnit = new Unit(((Element) unitElement).getAttributeValue("uid"),
+						((Element) unitElement).getAttributeValue("name"), Float.valueOf(
+								((Element) unitElement).getAttributeValue("ps")).floatValue(), Float
+								.valueOf(((Element) unitElement).getAttributeValue("cr"))
 								.floatValue(), Float.valueOf(
-								el.getAttributeValue("di")).floatValue(), Float
-								.valueOf(el.getAttributeValue("hd"))
+								((Element) unitElement).getAttributeValue("di")).floatValue(), Float
+								.valueOf(((Element) unitElement).getAttributeValue("hd"))
 								.floatValue(), Float.valueOf(
-								el.getAttributeValue("ae")).floatValue(),
-						Integer.valueOf(el.getAttributeValue("asg1wgt"))
+								((Element) unitElement).getAttributeValue("ae")).floatValue(),
+						Integer.valueOf(((Element) unitElement).getAttributeValue("asg1wgt"))
 								.intValue(), Integer.valueOf(
-								el.getAttributeValue("asg2wgt")).intValue(),
-						Integer.valueOf(el.getAttributeValue("examwgt"))
+								((Element) unitElement).getAttributeValue("asg2wgt")).intValue(),
+						Integer.valueOf(((Element) unitElement).getAttributeValue("examwgt"))
 								.intValue(), StudentUnitRecordManager
 								.instance().getRecordsByUnit(unitCode));
 				unitMap_.put(iUnit.getUnitCode(), iUnit);
@@ -63,10 +63,10 @@ public class UnitManager {
 		IUnit iUnit;
 
 		unitMap = new UnitMap();
-		for (Element el : (List<Element>) XMLManager.getXML().getDocument()
+		for (Object unitElement : (List<?>) XMLManager.getXML().getDocument()
 				.getRootElement().getChild("unitTable").getChildren("unit")) {
-			iUnit = new UnitProxy(el.getAttributeValue("uid"),
-					el.getAttributeValue("name"));
+			iUnit = new UnitProxy(((Element)unitElement).getAttributeValue("uid"),
+					((Element) unitElement).getAttributeValue("name"));
 			unitMap.put(iUnit.getUnitCode(), iUnit);
 		} // unit maps are filled with PROXY units
 		return unitMap;
