@@ -19,19 +19,19 @@ public class StudentUnitRecordProxy implements IStudentUnitRecord {
 		return this.unitCode_;
 	}
 
-	public void setAssignmentOne(float mark) {
+	public void setAssignment1(float mark) {
 		this.recordManager_.getStudentUnitRecord(studentID_, unitCode_).setAssignment1(mark);
 	}
 
-	public float getAssignmentOne() {
+	public float getAssignment1() {
 		return this.recordManager_.getStudentUnitRecord(studentID_, unitCode_).getAssignment1();
 	}
 
-	public void setAssignmentTwo(float mark) {
+	public void setAssignment2(float mark) {
 		this.recordManager_.getStudentUnitRecord(studentID_, unitCode_).setAssignment2(mark);
 	}
 
-	public float getAssignmentTwo() {
+	public float getAssignment2() {
 		return this.recordManager_.getStudentUnitRecord(studentID_, unitCode_).getAssignment2();
 	}
 
@@ -45,29 +45,5 @@ public class StudentUnitRecordProxy implements IStudentUnitRecord {
 
 	public float getTotal() {
 		return this.recordManager_.getStudentUnitRecord(studentID_, unitCode_).getTotal();
-	}
-
-	@Override
-	public void setAssignment1(float mark) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public float getAssignment1() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void setAssignment2(float mark) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public float getAssignment2() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 }

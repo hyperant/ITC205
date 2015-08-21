@@ -35,11 +35,11 @@ public class Student implements IStudent {
 	}
 
 	public void addUnitRecord(IStudentUnitRecord record) {
-		studentUnit_.add(record);
+		this.studentUnit_.add(record);
 	}
 
 	public IStudentUnitRecord getUnitRecord(String unitCode) {
-		for (IStudentUnitRecord unitRecord : studentUnit_)
+		for (IStudentUnitRecord unitRecord : this.studentUnit_)
 			if (unitRecord.getUnitCode().equals(unitCode))
 				return unitRecord;
 
@@ -48,7 +48,7 @@ public class Student implements IStudent {
 	}
 
 	public StudentUnitRecordList getUnitRecords() {
-		return studentUnit_;
+		return this.studentUnit_;
 	}
 
 	@Override

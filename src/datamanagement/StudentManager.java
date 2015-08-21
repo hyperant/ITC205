@@ -30,7 +30,7 @@ public class StudentManager {
 
 	private Element getStudentElement(Integer studentID) {
 		for (Object studentElement : ((List<?>) XMLManager.getXML().getDocument().getRootElement().getChild("studentTable").getChildren("student"))){
-			if (studentID.toString().equals(((Element) studentElement).getAttributeValue("studentID"))){
+			if (studentID.toString().equals(((Element) studentElement).getAttributeValue("sid"))){
 				return (Element) studentElement;
 			}
 		}
@@ -42,8 +42,7 @@ public class StudentManager {
 		Element studentElement = getStudentElement(studentID);
 		if (studentElement != null) {
 			StudentUnitRecordList recordList = StudentUnitRecordManager.instance().getRecordsByStudent(studentID);
-			student = new Student(new Integer(studentElement.getAttributeValue("studentID")), studentElement.getAttributeValue("firstName"),
-					studentElement.getAttributeValue("lastName"), recordList);
+			student = new Student(new Integer(studentElement.getAttributeValue("sid")), studentElement.getAttributeValue("fname"), studentElement.getAttributeValue("lname"), recordList);
 
 			this.studentMap_.put(student.getID(), student);
 			return student;
@@ -55,7 +54,7 @@ public class StudentManager {
 		Element studentElement = getStudentElement(studentID);
 
 		if (studentElement != null)
-			return new StudentProxy(studentID, studentElement.getAttributeValue("firstName"), studentElement.getAttributeValue("lastName"));
+			return new StudentProxy(studentID, studentElement.getAttributeValue("fname"), studentElement.getAttributeValue("lname"));
 		throw new RuntimeException("DBMD: createStudent : student not in file");
 	}
 
@@ -74,7 +73,8 @@ public class StudentManager {
 			student = createStudentProxy(new Integer(studentUnitRecord.getStudentID()));
 			studentRecord.put(student.getID(), student);
 		}
-		unitMap_.put(unitCode, studentRecord);
+		
+		this.unitMap_.put(unitCode, studentRecord);
 		return studentRecord;
 	}
 }
