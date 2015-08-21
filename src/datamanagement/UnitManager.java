@@ -21,7 +21,10 @@ public class UnitManager {
 
 	public IUnit getUnit(String unitCode) {
 		IUnit iUnit = unitMap_.get(unitCode);
-		return iUnit != null ? iUnit : createUnit(unitCode);
+		if (iUnit == null) {
+			iUnit = createUnit(unitCode);
+		}
+		return iUnit;
 
 	}
 
