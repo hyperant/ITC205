@@ -5,36 +5,40 @@ import org.jdom.Element;
 
 public class StudentUnitRecordManager {
 
-	private static StudentUnitRecordManager studentUnitRecordManager = null;
+	private static StudentUnitRecordManager studentUnitRecordManager_ = null;
 	private StudentUnitRecordMap recordMap_;
-	private java.util.HashMap<String, StudentUnitRecordList> unitCodeRecord;
-	private java.util.HashMap<Integer, StudentUnitRecordList> studentIdRecord;
+	private java.util.HashMap<String, StudentUnitRecordList> unitCodeRecord_;
+	private java.util.HashMap<Integer, StudentUnitRecordList> studentIdRecord_;
 
 	public static StudentUnitRecordManager instance() {
-		if (studentUnitRecordManager == null)
-			studentUnitRecordManager = new StudentUnitRecordManager();
-		return studentUnitRecordManager;
+		if (studentUnitRecordManager_ == null) {
+			studentUnitRecordManager_ = new StudentUnitRecordManager();
+		}
+		return studentUnitRecordManager_;
 	}
 
 	private StudentUnitRecordManager() {
 		recordMap_ = new StudentUnitRecordMap();
-		unitCodeRecord = new java.util.HashMap<>();
-		studentIdRecord = new java.util.HashMap<>();
+		unitCodeRecord_ = new java.util.HashMap<>();
+		studentIdRecord_ = new java.util.HashMap<>();
 	}
 
 	public IStudentUnitRecord getStudentUnitRecord(Integer studentID,
 			String unitCode) {
 		IStudentUnitRecord iStudentUnitRecord = recordMap_.get(studentID.toString() + unitCode);
-		return iStudentUnitRecord != null ? iStudentUnitRecord : createStudentUnitRecord(studentID, unitCode);
+		if (iStudentUnitRecord == null) {
+			iStudentUnitRecord = createStudentUnitRecord(studentID, unitCode);
+		}
+		return iStudentUnitRecord;
 	}
 
-	private IStudentUnitRecord createStudentUnitRecord(Integer uid, String sid) {
+	private IStudentUnitRecord createStudentUnitRecord(Integer unitCode, String studentId) {
 		IStudentUnitRecord iStudentUnitRecord;
 		for (Element el : (List<Element>) XMLManager.getXML().getDocument()
 				.getRootElement().getChild("studentUnitRecordTable")
 				.getChildren("record")) {
-			if (uid.toString().equals(el.getAttributeValue("sid"))
-					&& sid.equals(el.getAttributeValue("uid"))) {
+			if (unitCode.toString().equals(el.getAttributeValue("sid"))
+					&& studentId.equals(el.getAttributeValue("uid"))) {
 				iStudentUnitRecord = new StudentUnitRecord(new Integer(
 						el.getAttributeValue("sid")),
 						el.getAttributeValue("uid"), new Float(
@@ -50,7 +54,7 @@ public class StudentUnitRecordManager {
 	}
 
 	public StudentUnitRecordList getRecordsByUnit(String unitCode) {
-		StudentUnitRecordList studentUnitRecordList = unitCodeRecord.get(unitCode);
+		StudentUnitRecordList studentUnitRecordList = unitCodeRecord_.get(unitCode);
 		if (studentUnitRecordList != null)
 			return studentUnitRecordList;
 		studentUnitRecordList = new StudentUnitRecordList();
@@ -62,12 +66,12 @@ public class StudentUnitRecordManager {
 						.getAttributeValue("sid")), el.getAttributeValue("uid")));
 		}
 		if (studentUnitRecordList.size() > 0)
-			unitCodeRecord.put(unitCode, studentUnitRecordList); // be careful - this could be empty
+			unitCodeRecord_.put(unitCode, studentUnitRecordList); // be careful - this could be empty
 		return studentUnitRecordList;
 	}
 
 	public StudentUnitRecordList getRecordsByStudent(Integer studentID) {
-		StudentUnitRecordList studentUnitRecordList = studentIdRecord.get(studentID);
+		StudentUnitRecordList studentUnitRecordList = studentIdRecord_.get(studentID);
 		if (studentUnitRecordList != null)
 			return studentUnitRecordList;
 		studentUnitRecordList = new StudentUnitRecordList();
@@ -78,7 +82,7 @@ public class StudentUnitRecordManager {
 				studentUnitRecordList.add(new StudentUnitRecordProxy(new Integer(el
 						.getAttributeValue("sid")), el.getAttributeValue("uid")));
 		if (studentUnitRecordList.size() > 0)
-			studentIdRecord.put(studentID, studentUnitRecordList); // be careful - this could be empty
+			studentIdRecord_.put(studentID, studentUnitRecordList); // be careful - this could be empty
 		return studentUnitRecordList;
 	}
 
