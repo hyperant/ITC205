@@ -40,44 +40,44 @@ public class Unit implements IUnit {
 		return this.unitName_;
 	}
 
-	public void setPsCutoff(float cutoff) {
+	public void setPassCutoff(float cutoff) {
 		this.passCutoff_ = cutoff;
 	}
 
-	public float getPsCutoff() {
+	public float getPassCutoff() {
 		return this.passCutoff_;
 	}
 
-	public void setCrCutoff(float cutoff) {
+	public void setCreditCutoff(float cutoff) {
 		this.creditCutoff_ = cutoff;
 	}
 
-	public float getCrCutoff() {
+	public float getCreditCutoff() {
 		return this.creditCutoff_;
 	}
 
-	public void setDiCutoff(float cutoff) {
+	public void setDistinctionCutoff(float cutoff) {
 		this.distinctionCutoff_ = cutoff;
 	}
 
-	public float getDiCuttoff() {
+	public float getDistinctionCuttoff() {
 		return this.distinctionCutoff_;
 	}
 
-	public void setHdCutoff(float cutoff) {
+	public void setHighDistinctionCutoff(float cutoff) {
 		this.highDistinctionCutoff_ = cutoff;
 	}
 
-	public float getHdCutoff() {
+	public float getHighDistinctionCutoff() {
 		return this.highDistinctionCutoff_;
 
 	}
 
-	public void setAeCutoff(float cutoff) {
+	public void setAdditionalExaminationCutoff(float cutoff) {
 		this.additionalExaminationCutoff_ = cutoff;
 	}
 
-	public float getAeCutoff() {
+	public float getAdditionalExaminationCutoff() {
 		return this.additionalExaminationCutoff_;
 	}
 
@@ -98,12 +98,12 @@ public class Unit implements IUnit {
 	}
 
 	@Override
-	public int getAsg1Weight() {
+	public int getAssignment1Weight() {
 		return assignment1Weight_;
 	}
 
 	@Override
-	public int getAsg2Weight() {
+	public int getAssignment2Weight() {
 		return assignment2Weight_;
 	}
 

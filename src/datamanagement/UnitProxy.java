@@ -9,7 +9,7 @@ public class UnitProxy implements IUnit {
 	public UnitProxy(String unitCode, String unitName) {
 		this.unitCode_ = unitCode;
 		this.unitName_ = unitName;
-		unitManager = UnitManager.UM();
+		unitManager = UnitManager.unitManager();
 	}
 
 	public String getUnitCode() {
@@ -20,49 +20,49 @@ public class UnitProxy implements IUnit {
 		return this.unitName_;
 	}
 
-	public void setPsCutoff(float cutoff) {
-		unitManager.getUnit(unitCode_).setPsCutoff(cutoff);
+	public void setPassCutoff(float cutoff) {
+		unitManager.getUnit(unitCode_).setPassCutoff(cutoff);
 	}
 
-	public float getPsCutoff() {
-		return unitManager.getUnit(unitCode_).getPsCutoff();
+	public float getPassCutoff() {
+		return unitManager.getUnit(unitCode_).getPassCutoff();
 	}
 
-	public void setCrCutoff(float cutoff) {
-		unitManager.getUnit(unitCode_).setCrCutoff(cutoff);
+	public void setCreditCutoff(float cutoff) {
+		unitManager.getUnit(unitCode_).setCreditCutoff(cutoff);
 	}
 
-	public float getCrCutoff() {
-		return unitManager.getUnit(unitCode_).getCrCutoff();
+	public float getCreditCutoff() {
+		return unitManager.getUnit(unitCode_).getCreditCutoff();
 	}
 
-	public void setDiCutoff(float cutoff) {
-		unitManager.getUnit(unitCode_).setDiCutoff(cutoff);
+	public void setDistinctionCutoff(float cutoff) {
+		unitManager.getUnit(unitCode_).setDistinctionCutoff(cutoff);
 	}
 
-	public float getDiCuttoff() {
-		return unitManager.getUnit(unitCode_).getDiCuttoff();
+	public float getDistinctionCuttoff() {
+		return unitManager.getUnit(unitCode_).getDistinctionCuttoff();
 	}
 
-	public void setHdCutoff(float cutoff) {
-		unitManager.getUnit(unitCode_).setHdCutoff(cutoff);
+	public void setHighDistinctionCutoff(float cutoff) {
+		unitManager.getUnit(unitCode_).setHighDistinctionCutoff(cutoff);
 	}
 
-	public float getHdCutoff() {
+	public float getHighDistinctionCutoff() {
 
-		return unitManager.getUnit(unitCode_).getHdCutoff();
+		return unitManager.getUnit(unitCode_).getHighDistinctionCutoff();
 	}
 
-	public void setAeCutoff(float cutoff) {
-		unitManager.getUnit(unitCode_).setAeCutoff(cutoff);
+	public void setAdditionalExaminationCutoff(float cutoff) {
+		unitManager.getUnit(unitCode_).setAdditionalExaminationCutoff(cutoff);
 	}
 
-	public float getAeCutoff() {
-		return unitManager.getUnit(unitCode_).getAeCutoff();
+	public float getAdditionalExaminationCutoff() {
+		return unitManager.getUnit(unitCode_).getAdditionalExaminationCutoff();
 	}
 
-	public String getGrade(float f1, float f2, float f3) {
-		return unitManager.getUnit(unitCode_).getGrade(f1, f2, f3);
+	public String getGrade(float assignment1Mark, float assignment2Mark, float examMark) {
+		return unitManager.getUnit(unitCode_).getGrade(assignment1Mark, assignment2Mark, examMark);
 	}
 
 	public void addStudentRecord(IStudentUnitRecord record) {
@@ -77,20 +77,20 @@ public class UnitProxy implements IUnit {
 		return unitManager.getUnit(unitCode_).listStudentRecords();
 	}
 
-	public int getAsg1Weight() {
-		return unitManager.getUnit(unitCode_).getAsg1Weight();
+	public int getAssignment1Weight() {
+		return unitManager.getUnit(unitCode_).getAssignment1Weight();
 	}
 
-	public int getAsg2Weight() {
-		return unitManager.getUnit(unitCode_).getAsg2Weight();
+	public int getAssignment2Weight() {
+		return unitManager.getUnit(unitCode_).getAssignment2Weight();
 	}
 
 	public int getExamWeight() {
 		return unitManager.getUnit(unitCode_).getExamWeight();
 	}
 
-	public void setAssessmentWeights(int asg1Wgt, int asg2Wgt, int examWgt) {
-		unitManager.getUnit(unitCode_).setAssessmentWeights(asg1Wgt, asg2Wgt, examWgt);
+	public void setAssessmentWeights(int assignment1Weight, int assignment2Weight, int examWeight) {
+		unitManager.getUnit(unitCode_).setAssessmentWeights(assignment1Weight, assignment2Weight, examWeight);
 
 	}
 }

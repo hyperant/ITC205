@@ -6,29 +6,29 @@ public interface IUnit {
 
 	public String getUnitName();
 
-	public float getPsCutoff();
+	public float getPassCutoff();
 
-	public void setPsCutoff(float cutoff);
+	public void setPassCutoff(float cutoff);
 
-	public float getCrCutoff();
+	public float getCreditCutoff();
 
-	public void setCrCutoff(float cutoff);
+	public void setCreditCutoff(float cutoff);
 
-	public float getDiCuttoff();
+	public float getDistinctionCuttoff();
 
-	public void setDiCutoff(float cutoff);
+	public void setDistinctionCutoff(float cutoff);
 
-	public float getHdCutoff();
+	public float getHighDistinctionCutoff();
 
-	public void setHdCutoff(float cutoff);
+	public void setHighDistinctionCutoff(float cutoff);
 
-	public float getAeCutoff();
+	public float getAdditionalExaminationCutoff();
 
-	public void setAeCutoff(float cutoff);
+	public void setAdditionalExaminationCutoff(float cutoff);
 
-	public int getAsg1Weight();
+	public int getAssignment1Weight();
 
-	public int getAsg2Weight();
+	public int getAssignment2Weight();
 
 	public int getExamWeight();
 
