@@ -28,11 +28,10 @@ public class StudentManager {
 		return student != null ? student : createStudent(studentID);
 	}
 
-	@SuppressWarnings("unchecked")
 	private Element getStudentElement(Integer studentID) {
-		for (Element studentElement : ((List<Element>) XMLManager.getXML().getDocument().getRootElement().getChild("studentTable").getChildren("student"))){
-			if (studentID.toString().equals(studentElement.getAttributeValue("studentID"))){
-				return studentElement;
+		for (Object studentElement : ((List<?>) XMLManager.getXML().getDocument().getRootElement().getChild("studentTable").getChildren("student"))){
+			if (studentID.toString().equals(((Element) studentElement).getAttributeValue("studentID"))){
+				return (Element) studentElement;
 			}
 		}
 		return null;
