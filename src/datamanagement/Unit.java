@@ -12,8 +12,9 @@ public class Unit implements IUnit {
 
 	private StudentUnitRecordList studentUnitRecordList_;
 
-	public Unit(String unitCode, String unitNumber, float passCutoff, float creditCutoff, float distinctionCutoff, float highDistinctionCutoff,
-			float additionalExaminationCutoff, int assignment1Weight, int assignment2Weight, int examWeight, StudentUnitRecordList studentUnitRecordList) {
+	public Unit(String unitCode, String unitNumber, float passCutoff, float creditCutoff, float distinctionCutoff,
+			float highDistinctionCutoff, float additionalExaminationCutoff, int assignment1Weight,
+			int assignment2Weight, int examWeight, StudentUnitRecordList studentUnitRecordList) {
 
 		unitCode_ = unitCode;
 		unitName_ = unitNumber;
@@ -23,7 +24,11 @@ public class Unit implements IUnit {
 		highDistinctionCutoff_ = highDistinctionCutoff;
 		additionalExaminationCutoff_ = additionalExaminationCutoff;
 		setAssessmentWeights(assignment1Weight, assignment2Weight, examWeight);
-		studentUnitRecordList_ = studentUnitRecordList == null ? new StudentUnitRecordList() : studentUnitRecordList;
+		if (studentUnitRecordList == null) {
+			studentUnitRecordList_ = new StudentUnitRecordList();
+		} else {
+			studentUnitRecordList_ = studentUnitRecordList;
+		}
 	}
 
 	public String getUnitCode() {
@@ -109,9 +114,9 @@ public class Unit implements IUnit {
 
 	@Override
 	public void setAssessmentWeights(int assignment1Weight, int assignment2Weight, int examWeight) {
-		if (assignment1Weight < 0 || assignment1Weight > 100 || assignment2Weight < 0 || assignment2Weight > 100 || examWeight< 0 || examWeight > 100) {
-			throw new RuntimeException(
-					"Assessment weights cant be less than zero or greater than 100");
+		if (assignment1Weight < 0 || assignment1Weight > 100 || assignment2Weight < 0 || assignment2Weight > 100
+				|| examWeight < 0 || examWeight > 100) {
+			throw new RuntimeException("Assessment weights cant be less than zero or greater than 100");
 		}
 		if (assignment1Weight + assignment2Weight + examWeight != 100) {
 			throw new RuntimeException("Assessment weights must add to 100");
@@ -121,11 +126,12 @@ public class Unit implements IUnit {
 		this.examWeight_ = examWeight;
 	}
 
-	private void setCutoffs(float pass, float credit, float distinction, float highDistinction, float additionalExamination) {
+	private void setCutoffs(float pass, float credit, float distinction, float highDistinction,
+			float additionalExamination) {
 		if (pass < 0 || pass > 100 || credit < 0 || credit > 100 || distinction < 0 || distinction > 100
-				|| highDistinction < 0 || highDistinction > 100 || additionalExamination < 0 || additionalExamination > 100) {
-			throw new RuntimeException(
-					"Assessment cutoffs cant be less than zero or greater than 100");
+				|| highDistinction < 0 || highDistinction > 100 || additionalExamination < 0
+				|| additionalExamination > 100) {
+			throw new RuntimeException("Assessment cutoffs cant be less than zero or greater than 100");
 		}
 		if (additionalExamination >= pass) {
 			throw new RuntimeException("AE cutoff must be less than PS cutoff");
@@ -145,9 +151,9 @@ public class Unit implements IUnit {
 	public String getGrade(float assignment1Mark, float assignment2Mark, float examMark) {
 		float total = assignment1Mark + assignment2Mark + examMark;
 
-		if (assignment1Mark < 0 || assignment1Mark > assignment1Weight_ || assignment2Mark < 0 || assignment2Mark > assignment2Weight_ || examMark < 0 || examMark > examWeight_) {
-			throw new RuntimeException(
-					"Marks cannot be less than zero or greater than assessment weights");
+		if (assignment1Mark < 0 || assignment1Mark > assignment1Weight_ || assignment2Mark < 0
+				|| assignment2Mark > assignment2Weight_ || examMark < 0 || examMark > examWeight_) {
+			throw new RuntimeException("Marks cannot be less than zero or greater than assessment weights");
 		}
 
 		if (total < additionalExaminationCutoff_) {
