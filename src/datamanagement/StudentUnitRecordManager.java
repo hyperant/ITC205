@@ -1,7 +1,7 @@
 package datamanagement;
 
 import java.util.List;
-import org.jdom.*;
+import org.jdom.Element;
 
 public class StudentUnitRecordManager {
 
