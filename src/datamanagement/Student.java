@@ -26,7 +26,7 @@ public class Student implements IStudent {
 	}
 
 	public String getLastName() {
-		return lastName_;
+		return this.lastName_;
 	}
 
 	public void setLastName(String lastName) {
