@@ -55,8 +55,7 @@ public class StudentUnitRecordManager {
 		StudentUnitRecordList studentUnitRecordList = unitCodeRecord_.get(unitCode);
 		if (studentUnitRecordList != null) {
 			return studentUnitRecordList;
-		}
-		studentUnitRecordList = new StudentUnitRecordList();
+		}		studentUnitRecordList = new StudentUnitRecordList();
 		for (Object unitRecordElement : (List<?>) XMLManager.getXML().getDocument().getRootElement()
 				.getChild("studentUnitRecordTable").getChildren("record")) {
 			if (unitCode.equals(((Element) unitRecordElement).getAttributeValue("uid"))) {
@@ -95,9 +94,9 @@ public class StudentUnitRecordManager {
 				.getChild("studentUnitRecordTable").getChildren("record")) {
 			if (irec.getStudentID().toString().equals(((Element) recordElement).getAttributeValue("sid"))
 					&& irec.getUnitCode().equals(((Element) recordElement).getAttributeValue("uid"))) {
-				((Element) recordElement).setAttribute("asg1", new Float(irec.getAsg1()).toString());
+				((Element) recordElement).setAttribute("asg1", new Float(irec.getAssignment1()).toString());
 
-				((Element) recordElement).setAttribute("asg2", new Float(irec.getAsg2()).toString());
+				((Element) recordElement).setAttribute("asg2", new Float(irec.getAssignment2()).toString());
 				((Element) recordElement).setAttribute("exam", new Float(irec.getExam()).toString());
 				XMLManager.getXML().saveDocument(); // write out the XML file
 													// for continuous save
