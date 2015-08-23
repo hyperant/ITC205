@@ -1,5 +1,6 @@
 package datamanagement;
 
+import java.util.HashMap;
 import java.util.List;
 import org.jdom.Element;
 
@@ -7,8 +8,8 @@ public class StudentUnitRecordManager {
 
 	private static StudentUnitRecordManager studentUnitRecordManager_ = null;
 	private StudentUnitRecordMap recordMap_;
-	private java.util.HashMap<String, StudentUnitRecordList> unitCodeRecord_;
-	private java.util.HashMap<Integer, StudentUnitRecordList> studentIdRecord_;
+	private HashMap<String, StudentUnitRecordList> unitCodeRecord_;
+	private HashMap<Integer, StudentUnitRecordList> studentIdRecord_;
 
 	public static StudentUnitRecordManager instance() {
 		if (studentUnitRecordManager_ == null) {
@@ -19,8 +20,8 @@ public class StudentUnitRecordManager {
 
 	private StudentUnitRecordManager() {
 		recordMap_ = new StudentUnitRecordMap();
-		unitCodeRecord_ = new java.util.HashMap<>();
-		studentIdRecord_ = new java.util.HashMap<>();
+		unitCodeRecord_ = new HashMap<>();
+		studentIdRecord_ = new HashMap<>();
 	}
 
 	public IStudentUnitRecord getStudentUnitRecord(Integer studentID, String unitCode) {

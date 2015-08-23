@@ -21,8 +21,8 @@ public class ListUnitsCTL {
 		lister.clearUnits();
 		UnitMap units = this.unitManager_.getUnits();
 
-		for (String s : units.keySet()) {
-			lister.addUnit(units.get(s));
+		for (String string : units.keySet()) {
+			lister.addUnit(units.get(string));
 		}
 	}
 }
