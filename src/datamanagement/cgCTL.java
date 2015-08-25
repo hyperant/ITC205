@@ -2,7 +2,7 @@ package datamanagement;
 
 /**
  * This class is responsible for setting up the GUI that is displayed to the end user
- * 
+ *
  * @author Jason Fletcher
  *
  */
@@ -27,7 +27,7 @@ public class cgCTL {
 	 * </pre>
 	 */
 	public cgCTL() {
-		
+
 	}
 
 	/**
@@ -35,7 +35,7 @@ public class cgCTL {
 	 */
 	public void execute() {
 		ListUnitsCTL listUnitsCTL = new ListUnitsCTL();
-		
+
 		this.cgUI_ = new cgUI(this);
 		this.cgUI_.setState1(false);
 
@@ -51,10 +51,10 @@ public class cgCTL {
 		this.cgUI_.setState1(true);
 	}
 
-	
+
 	/**
 	 * Sets the selected course unit and updates the GUI accordingly.
-	 * 
+	 *
 	 * @param unitCode The current courses unit code
 	 */
 	public void unitSelected(String unitCode) {
@@ -66,18 +66,18 @@ public class cgCTL {
 			this.unitCode_ = unitCode;
 			this.cgUI_.setState2(true);
 		}
-		
+
 		this.cgUI_.setState3(false);
 	}
 
 	/**
 	 * Sets the selected student and updates the GUI accordingly.
-	 * 
+	 *
 	 * @param sID The current Students ID
 	 */
 	public void studentSelected(Integer sID) {
 		this.currentStudentID_ = sID;
-		
+
 		if (this.currentStudentID_.intValue() == 0) { //If we don't have a student set then we need to disable the assignment mark box's
 			this.cgUI_.Refresh3();
 			this.cgUI_.setState3(false);
@@ -99,7 +99,7 @@ public class cgCTL {
 
 	/**
 	 * Checks the current students grade
-	 * 
+	 *
 	 * @param assignment1 the students mark for their first assignment
 	 * @param assignment2 the students mark for their second assignment
 	 * @param exam the students mark for their exam
@@ -107,16 +107,16 @@ public class cgCTL {
 	 * @see String
 	 */
 	public String checkGrade(float assignment1, float assignment2, float exam) {
-		IUnit unit = UnitManager.UM().getUnit(this.unitCode_);
+		IUnit unit = UnitManager.unitManager().getUnit(this.unitCode_);
 		String grade = unit.getGrade(assignment1, assignment2, exam);
-		
+
 		this.cgUI_.setState4(true);
 		this.cgUI_.setState5(false);
-		
+
 		if (this.changed_) {
 			this.cgUI_.setState6(true);
 		}
-		
+
 		return grade;
 	}
 
@@ -132,20 +132,20 @@ public class cgCTL {
 
 	/**
 	 * Save the users grade
-	 * 
+	 *
 	 * @param assignment1 the students mark for their first assignment
 	 * @param assignment2 the students mark for their second assignment
 	 * @param exam the students mark for their exam
 	 */
 	public void saveGrade(float assignment1, float assignment2, float exam) {
 		IStudent studentManager = StudentManager.get().getStudent(this.currentStudentID_);
-		
+
 		IStudentUnitRecord studentRecord = studentManager.getUnitRecord(this.unitCode_);
 		studentRecord.setAssignment1(assignment1);
 		studentRecord.setAssignment2(assignment2);
 		studentRecord.setExam(exam);
 		StudentUnitRecordManager.instance().saveRecord(studentRecord);
-		
+
 		this.cgUI_.setState4(true);
 		this.cgUI_.setState5(false);
 		this.cgUI_.setState6(false);

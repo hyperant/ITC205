@@ -2,33 +2,43 @@ package datamanagement;
 
 public interface IUnit {
 
-    public String getUnitCode();
-    public String getUnitName();
+	public String getUnitCode();
 
-    public float getPsCutoff();
-    public void  setPsCutoff1(float cutoff);
+	public String getUnitName();
 
-    public float getCrCutoff();
-    public void  setCrCutoff(float cutoff);
+	public float getPassCutoff();
 
-    public float getDiCuttoff();    
-    public void  setDiCutoff(float cutoff);
+	public void setPassCutoff(float cutoff);
 
-    public float getHdCutoff();
-    public void  setHdCutoff(float cutoff);    
+	public float getCreditCutoff();
 
-    public float getAeCutoff();    
-    public void  setAeCutoff(float cutoff);
-    
-    public int getAsg1Weight();
-    public int getAsg2Weight();
-    public int getExamWeight();
-    public void setAssessmentWeights(int asg1Wgt, int asg2Wgt, int examWgt);
+	public void setCreditCutoff(float cutoff);
 
-    public String getGrade(float asg1, float asg2, float exam);
+	public float getDistinctionCuttoff();
 
-    public void addStudentRecord(IStudentUnitRecord record );
-    public IStudentUnitRecord getStudentRecord(int studentID );
-    
-    public StudentUnitRecordList listStudentRecords();
+	public void setDistinctionCutoff(float cutoff);
+
+	public float getHighDistinctionCutoff();
+
+	public void setHighDistinctionCutoff(float cutoff);
+
+	public float getAdditionalExaminationCutoff();
+
+	public void setAdditionalExaminationCutoff(float cutoff);
+
+	public int getAssignment1Weight();
+
+	public int getAssignment2Weight();
+
+	public int getExamWeight();
+
+	public void setAssessmentWeights(int assignment1Weight, int assignment2Weight, int examWeight);
+
+	public String getGrade(float assignment1Mark, float assignment2Mark, float examMark);
+
+	public void addStudentRecord(IStudentUnitRecord record);
+
+	public IStudentUnitRecord getStudentRecord(int studentID);
+
+	public StudentUnitRecordList listStudentRecords();
 }
